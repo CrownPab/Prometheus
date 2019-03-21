@@ -7,10 +7,10 @@ import java.util.Vector;
 import javafx.scene.input.KeyCode;
 import prometheus.constants.Direction;
 import prometheus.constants.GlobalConstants;
+import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
-import prometheus.entity.player.Wizard;
-import prometheus.movingobjects.Bubble;
+import prometheus.projectiles.Bubble;
 import prometheus.scenes.Sandbox;
 
 public class InputManager {

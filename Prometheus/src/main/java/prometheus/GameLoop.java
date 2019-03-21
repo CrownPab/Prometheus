@@ -9,11 +9,11 @@ import java.util.Vector;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import prometheus.constants.GlobalConstants;
+import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
-import prometheus.entity.player.Wizard;
 import prometheus.gamecontroller.InputManager;
-import prometheus.movingobjects.Bubble;
-import prometheus.movingobjects.WizardProjectile;
+import prometheus.projectiles.Bubble;
+import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 
 public class GameLoop {
@@ -50,7 +50,7 @@ public class GameLoop {
 
     public static void updateGame() {
         InputManager.handlePlayerMovements();
-        Vector<Entity> entities = Sandbox.getEntities();
+        ArrayList<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
   
         while (it.hasNext()) {

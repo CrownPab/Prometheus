@@ -1,4 +1,4 @@
-package prometheus.movingobjects;
+package prometheus.projectiles;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -184,10 +184,6 @@ public class WizardProjectile implements MovingEntity{
 			default:
 				break;
 			}
-
-//            if ((positionX < 10 || positionX > GlobalConstants.CANVAS_WIDTH-10 || positionY < 10 || positionY > GlobalConstants.CANVAS_HEIGHT-10));
-//            	this.alive = false;
-
 			checkCollisions(positionX, positionY);
 		}
 

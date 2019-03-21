@@ -1,4 +1,4 @@
-package prometheus.entity.player;
+package prometheus.enemies;
 
 import javafx.animation.PathTransition;
 import javafx.scene.image.Image;
@@ -13,8 +13,8 @@ import prometheus.entity.Entity;
 import prometheus.entity.KillableEntity;
 import prometheus.entity.MovingEntity;
 import prometheus.entity.boundedbox.RectBoundedBox;
-import prometheus.movingobjects.Bubble;
-import prometheus.movingobjects.WizardProjectile;
+import prometheus.projectiles.Bubble;
+import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 import prometheus.utils.ImageUtils;
 

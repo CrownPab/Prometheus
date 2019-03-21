@@ -1,11 +1,11 @@
-package prometheus.movingobjects;
+package prometheus.projectiles;
 
 import prometheus.GameLoop;
 import prometheus.constants.Direction;
+import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.entity.MovingEntity;
 import prometheus.entity.boundedbox.RectBoundedBox;
-import prometheus.entity.player.Wizard;
 import prometheus.entity.staticobjects.AcidPool;
 import prometheus.entity.staticobjects.Wall;
 import prometheus.scenes.Sandbox;

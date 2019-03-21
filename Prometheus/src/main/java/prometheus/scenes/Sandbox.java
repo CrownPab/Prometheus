@@ -5,7 +5,7 @@ import static prometheus.constants.GlobalConstants.CANVAS_WIDTH;
 import static prometheus.constants.GlobalConstants.SCENE_HEIGHT;
 import static prometheus.constants.GlobalConstants.SCENE_WIDTH;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -36,9 +36,9 @@ public class Sandbox {
         sceneStarted=false;
     }
 
-	private static Vector<Entity> entities = new Vector<Entity>();
+	private static ArrayList<Entity> entities = new ArrayList<Entity>();
 
-	public static Vector<Entity> getEntities(){
+	public static ArrayList<Entity> getEntities(){
 		return entities;
 	}
 
@@ -146,8 +146,8 @@ public class Sandbox {
 
     //Eventually this should take some kind of map input, maybe a text file or something
     public static void loadMap() {
-    	Vector<Wall> walls = new Vector<Wall>();
-    	Vector<AcidPool> pools = new Vector<AcidPool>();
+    	ArrayList<Wall> walls = new ArrayList<Wall>();
+    	ArrayList<AcidPool> pools = new ArrayList<AcidPool>();
 
     	for(int i = 0; i < SCENE_WIDTH; i += 32){
     		for(int j = 0; j < SCENE_HEIGHT; j += 32){
