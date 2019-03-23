@@ -37,7 +37,7 @@ public class Wizard implements KillableEntity {
     String name;
 
     public Wizard() {
-        init(64, 64);
+        init(64,64);
     }
 
     public Wizard(int posX, int posY) {

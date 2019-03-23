@@ -17,11 +17,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import prometheus.GameLoop;
+import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
 import prometheus.entity.staticobjects.AcidPool;
 import prometheus.entity.staticobjects.Wall;
 import prometheus.gamecontroller.EventHandler;
+import prometheus.maps.Map;
 
 
 public class Sandbox {
@@ -77,7 +79,7 @@ public class Sandbox {
         
         root.getChildren().add(hb);
     }
-
+    /*
     private static void init() {
     	System.out.println("New Scene");
         root = new Group();
@@ -101,6 +103,7 @@ public class Sandbox {
         EventHandler.attachEventHandlers(s);
 
     }
+    */
     
     private static void init2() {
     	System.out.println("New Scene");
@@ -118,8 +121,12 @@ public class Sandbox {
         Player p = new Player();
         setPlayer(p);
         
+        Wizard w = new Wizard(100,100);
+    	addEntityToGame(w);
+        
         //load map
-        loadMap();
+        Map.Map2();
+        
 
         //should be called at last it based on player
         EventHandler.attachEventHandlers(s);
@@ -144,30 +151,6 @@ public class Sandbox {
     }
 
 
-    //Eventually this should take some kind of map input, maybe a text file or something
-    public static void loadMap() {
-    	ArrayList<Wall> walls = new ArrayList<Wall>();
-    	ArrayList<AcidPool> pools = new ArrayList<AcidPool>();
-
-    	for(int i = 0; i < SCENE_WIDTH; i += 32){
-    		for(int j = 0; j < SCENE_HEIGHT; j += 32){
-    			if(i == 0 || i + 33 > SCENE_HEIGHT || j == 0 || j + 33 > SCENE_WIDTH) {
-    				walls.add(new Wall(i, j));
-    			}
-//    			else if(i % 5 == 0)
-//    				if(ThreadLocalRandom.current().nextInt(0, 2) < 1)
-//    					pools.add(new AcidPool(i,j));
-    		}
-    	}
-
-    	for(Wall wall : walls) {
-    		addEntityToGame(wall);
-    	}
-    	
-    	for(AcidPool wall : pools) {
-    		addEntityToGame(wall);
-    	}
-    }
 
     public static void setupScene(){
         if(!sceneStarted){
