@@ -268,7 +268,7 @@ public class Sandbox {
         setPlayer(p);
         
         //load map
-        Map.Map1();
+        Map.Map5();
         
 
         //should be called at last it based on player

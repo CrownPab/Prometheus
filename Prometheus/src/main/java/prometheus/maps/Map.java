@@ -299,9 +299,12 @@ public class Map
     	{
     		Sandbox.getEntities().remove(i);
     	}
+    	
+    	
     	//Border
     	for(int i = 0; i < SCENE_WIDTH; i += 32){
     	    for(int j = 0; j < SCENE_HEIGHT; j += 32){
+    	    	if(i == 0 || i + 33 > SCENE_HEIGHT || j == 0 || j + 33 > SCENE_WIDTH) {
     	    	walls.add(new Wall(i, j));
 				if(i==0 && j == 0)
 				{
@@ -313,6 +316,7 @@ public class Map
 				{
 					mapLayout[i/32][0] = 1;
 				}
+    	    	}
     	    }
     	 }
     	
