@@ -1,5 +1,6 @@
 package prometheus.projectiles;
 
+import javafx.scene.paint.Color;
 import prometheus.GameLoop;
 import prometheus.constants.Direction;
 import prometheus.enemies.Runner;
@@ -46,10 +47,8 @@ public class Bubble implements MovingEntity{
 
     @Override
     public void draw() {
-////        Renderer.playAnimation(sprite);
-//    	Sandbox.getGraphicsContext().fillPolygon(new double[]{positionX, positionX+30, positionX, positionX+30},
-//                new double[]{positionY, positionY, positionY+30, positionY+30}, 4);
-    	Sandbox.getGraphicsContext().fillOval(positionX+5, positionY+5, 20, 20);
+    	Sandbox.getGraphicsContext().setStroke(Color.CORNFLOWERBLUE);
+    	Sandbox.getGraphicsContext().strokeOval(positionX+5, positionY+5, 20, 20);
     }
 
     @Override
@@ -128,9 +127,6 @@ public class Bubble implements MovingEntity{
                     break;
                 default:
             }
-            
-//            if ((positionX < 10 || positionX > GlobalConstants.CANVAS_WIDTH-10 || positionY < 10 || positionY > GlobalConstants.CANVAS_HEIGHT-10));
-//            	this.alive = false;
 
             checkCollisions(positionX, positionY);
         }

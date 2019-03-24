@@ -20,16 +20,16 @@ public class InputManager {
         Player player = Sandbox.getPlayer();
 
         if(keyboardInputs.contains(KeyCode.UP) || keyboardInputs.contains(KeyCode.W)){
-            player.move(5,Direction.UP);
+            player.move(3,Direction.UP);
         }
         if(keyboardInputs.contains(KeyCode.DOWN) || keyboardInputs.contains(KeyCode.S)){
-            player.move(5,Direction.DOWN);
+            player.move(3,Direction.DOWN);
         }
         if(keyboardInputs.contains(KeyCode.LEFT) || keyboardInputs.contains(KeyCode.A)){
-            player.move(5,Direction.LEFT);
+            player.move(3,Direction.LEFT);
         }
         if(keyboardInputs.contains(KeyCode.RIGHT) || keyboardInputs.contains(KeyCode.D)){
-            player.move(5,Direction.RIGHT);
+            player.move(3,Direction.RIGHT);
         }
         
         if(keyboardInputs.contains(KeyCode.SPACE)){ 

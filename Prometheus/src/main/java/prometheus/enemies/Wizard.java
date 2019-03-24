@@ -38,7 +38,7 @@ public class Wizard implements KillableEntity {
         isAlive = true;
     }
     
-    public void shoot() {    	
+    public void shoot() {    
     	Sandbox.addEntityToGame(new WizardProjectile(positionX, positionY, getDirectionTo(Sandbox.getPlayer())));
     }
 
