@@ -15,7 +15,7 @@ public class RectBoundedBox {
         this.y=y;
         width=w;
         height=h;
-        boundary = new Rectangle2D(x-9, y-9, width+20, height+20);
+        boundary = new Rectangle2D(x-11, y-8, width+21, height+19);
     }
 
     public Rectangle2D getBoundary() {
