@@ -54,10 +54,6 @@ public class Player implements MovingEntity, KillableEntity {
         playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         
         Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-//        down  = ImageUtils.crop(img, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        left  = ImageUtils.crop(img, 30, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        up = ImageUtils.crop(img, 60, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        right = ImageUtils.crop(img, 90, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         right  = ImageUtils.crop(img, 271, 123, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         up = ImageUtils.crop(img, 331, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
@@ -82,7 +78,6 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public boolean isColliding(Entity b) {
-       // playerBoundary.setPosition(positionX, positionY);
         RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
         return playerBoundary.checkCollision(otherEntityBoundary);
     }
