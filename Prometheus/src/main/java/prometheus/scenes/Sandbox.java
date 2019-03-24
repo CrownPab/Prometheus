@@ -283,7 +283,7 @@ public class Sandbox {
     	button.setLayoutY(300);
     	
     	Button button2 = new Button();
-    	button2.setText("Restart");
+    	button2.setText("Main menu");
     	button2.setOnAction(e -> introScreen());
     	button2.setLayoutX(280);
     	button2.setLayoutY(340);
