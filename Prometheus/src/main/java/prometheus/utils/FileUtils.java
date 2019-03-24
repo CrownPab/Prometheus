@@ -4,7 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class FileUtils {
 	
@@ -85,5 +91,18 @@ public class FileUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static HashMap<String, Integer> getHighscoresList() {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		for (final File fileEntry : (new File("playerdata")).listFiles()) {
+			if (!fileEntry.isDirectory()) {
+				String name = fileEntry.getName().replace(".txt", "");
+				map.putIfAbsent(name, getPlayerKills(name));
+			}
+		}
+
+		return map.entrySet().stream().sorted(Collections.reverseOrder(Entry.comparingByValue()))
+				.collect(Collectors.toMap(Entry::getKey, Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 	}
 }

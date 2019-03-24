@@ -6,6 +6,7 @@ import static prometheus.constants.GlobalConstants.SCENE_HEIGHT;
 import static prometheus.constants.GlobalConstants.SCENE_WIDTH;
 
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -22,10 +23,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import prometheus.GameLoop;
-import prometheus.PlayerStats;
 import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
@@ -97,7 +98,12 @@ public class Sandbox {
 			BorderPane borderPane = new BorderPane(); // borderpane is being used for the main menu screen
 			TextArea leaderBoard = new TextArea(); // this text area will be used for the leaderboard
 			VBox vbox = new VBox(20); // creates vbox with spacing 20
-
+			
+			leaderBoard.setFont(new Font(20));
+			for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
+				leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
+			
+			
 			Button playGame = new Button("Play Game"); // users will click this button to enter the game
 			Button stats = new Button("Stats"); // users will click this button to view their stats
 			Button credits = new Button("Credits"); // will display all personal that worked on the game for user to see
@@ -192,8 +198,8 @@ public class Sandbox {
 		Pane pane = new Pane();
 
 		// These will be used to label the stats
-		Text stat1 = new Text("Kills: " + (new PlayerStats(username).kills));
-		Text stat2 = new Text("Deaths: " + (new PlayerStats(username).deaths));
+		Text stat1 = new Text("Kills: " + FileUtils.getPlayerKills(username));
+		Text stat2 = new Text("Deaths: " + FileUtils.getPlayerDeaths(username));
 		// THis is a placeholder image
 		// We are going to put the sprite of the character here
 		ImageView imageView = new ImageView("file:///C:\\coding\\csci2020u\\InterfaceV2\\src\\application\\china.gif");

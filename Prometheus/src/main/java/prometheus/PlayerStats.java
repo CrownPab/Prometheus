@@ -9,7 +9,6 @@ public class PlayerStats {
 	public int deaths;
 	
 	public PlayerStats(String username) {
-		//TODO Load from file based on username
 		name = username;
 		kills = FileUtils.getPlayerKills(username);
 		deaths = FileUtils.getPlayerDeaths(username);
