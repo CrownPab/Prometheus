@@ -10,7 +10,7 @@ public class Prometheus extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle(GlobalConstants.GAME_NAME + GlobalConstants.GAME_VERSION);
+        primaryStage.setTitle(GlobalConstants.GAME_NAME);
         Sandbox.setupScene();
         Scene s = Sandbox.getScene();
         primaryStage.setScene(s);

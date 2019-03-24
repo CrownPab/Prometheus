@@ -21,7 +21,7 @@ public class Map
 	
 	public static void Map1(){
 		mobCount = 0;
-		wave =1;
+		wave = 1;
 		lvl = 1;
 		ArrayList<Wall> walls = new ArrayList<Wall>();
 		mapLayout = new int[20][20];
@@ -430,7 +430,14 @@ public class Map
 	
 	public static void spawnRunner() {
 		Random r = new Random();
-    	Sandbox.addEntityToGame(new Runner((r.nextInt(18) + 1) * 32, (r.nextInt(18) + 1) * 32));
+		int i = (r.nextInt(18) + 1) * 32;
+		int j = (r.nextInt(18) + 1) * 32;
+		while(mapLayout[i/32][j/32] == 1)
+		{
+			i = (r.nextInt(18) + 1) * 32;
+			j = (r.nextInt(18) + 1) * 32;
+		}
+    	Sandbox.addEntityToGame(new Runner(i, j));
     	mobCount++;
 	}
 	
@@ -613,7 +620,7 @@ public class Map
         }	
         if(lvl == 5 && wave == 4 && mobCount == 0)
         {
-        	//Call end of game you win function here
+        	Sandbox.stopGame(true);
         }
 	}
 }

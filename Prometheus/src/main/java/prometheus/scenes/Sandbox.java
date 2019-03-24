@@ -27,7 +27,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import prometheus.GameLoop;
-import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
 import prometheus.gamecontroller.EventHandler;
@@ -43,7 +42,7 @@ public class Sandbox {
     static GraphicsContext gc;
     private static boolean sceneStarted;
     public static Player sandboxPlayer;
-    public static String username;
+    static String username;
     static{
         sceneStarted=false;
     }
@@ -76,64 +75,55 @@ public class Sandbox {
         TextField tf = new TextField();
         tf.setPromptText("Enter a Username:");
         tf.setOnAction(e -> {
-//        	Button button = new Button();
-//        	button.setText("Play");
-//        	button.setOnAction(a -> init2());
-//        	button.setLayoutX(280);
-//        	button.setLayoutY(300);
         	username = tf.getText();
         	FileUtils.getOrCreateFile(username);
         	root.getChildren().clear();
-//        	root.getChildren().addAll(button);
-        	
-			Stage outStage = new Stage();
-			outStage.setX(1920 / 2 - 350);
-			outStage.setY(1080 / 2 - 155);
-			
-//			String uriString = new File("C:\\coding\\csci2020u\\InterfaceV2\\src\\application\\MoBamba.mp3").toURI()
-//			.toString();
-//			MediaPlayer player = new MediaPlayer(new Media(uriString));
-//			player.play();
-			
-			BorderPane borderPane = new BorderPane(); // borderpane is being used for the main menu screen
-			TextArea leaderBoard = new TextArea(); // this text area will be used for the leaderboard
-			VBox vbox = new VBox(20); // creates vbox with spacing 20
-			
-			leaderBoard.setFont(new Font(20));
-			for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
-				leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
-			
-			
-			Button playGame = new Button("Play Game"); // users will click this button to enter the game
-			Button stats = new Button("Stats"); // users will click this button to view their stats
-			Button credits = new Button("Credits"); // will display all personal that worked on the game for user to see
-			playGame.setOnAction(a -> init2());
-			
-			credits.setOnAction(a -> credits(outStage));
-
-			stats.setOnAction(a -> stats(outStage));
-			
-			
-			vbox.getChildren().addAll(playGame, stats, credits); // inserts all three buttons into vbox
-
-			borderPane.setLeft(vbox); // sets postion of the vbox for the on the borderpane
-
-			borderPane.setRight(leaderBoard); // sets the position of the leaderboard on the borderpane
-			root.getChildren().addAll(borderPane);
-
-//			credits.setOnAction(a -> {
-//				credits(outStage);
-//			});
-//
-//			stats.setOnAction(a -> {
-//				stats(outStage);
-//			});
+        	mainMenu();
         });
         
         hb.getChildren().addAll(label1, tf);
         hb.setSpacing(10);
         
         root.getChildren().add(hb);
+    }
+    
+    public static void mainMenu() {
+    	root.getChildren().clear();
+    	
+		Stage outStage = new Stage();
+		outStage.setX(1920 / 2 - 350);
+		outStage.setY(1080 / 2 - 155);
+		
+//		String uriString = new File("C:\\coding\\csci2020u\\InterfaceV2\\src\\application\\MoBamba.mp3").toURI()
+//		.toString();
+//		MediaPlayer player = new MediaPlayer(new Media(uriString));
+//		player.play();
+		
+		BorderPane borderPane = new BorderPane(); // borderpane is being used for the main menu screen
+		TextArea leaderBoard = new TextArea(); // this text area will be used for the leaderboard
+		VBox vbox = new VBox(20); // creates vbox with spacing 20
+		
+		leaderBoard.setFont(new Font(20));
+		for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
+			leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
+		
+		
+		Button playGame = new Button("Play Game"); // users will click this button to enter the game
+		Button stats = new Button("Stats"); // users will click this button to view their stats
+		Button credits = new Button("Credits"); // will display all personal that worked on the game for user to see
+		playGame.setOnAction(a -> init());
+		
+		credits.setOnAction(a -> credits(outStage));
+
+		stats.setOnAction(a -> stats(outStage));
+		
+		
+		vbox.getChildren().addAll(playGame, stats, credits); // inserts all three buttons into vbox
+
+		borderPane.setLeft(vbox); // sets postion of the vbox for the on the borderpane
+
+		borderPane.setRight(leaderBoard); // sets the position of the leaderboard on the borderpane
+		root.getChildren().addAll(borderPane);
     }
     
 	public static void credits(Stage outStage) {
@@ -225,33 +215,7 @@ public class Sandbox {
 
 	}
     
-    /*
     private static void init() {
-    	System.out.println("New Scene");
-        root = new Group();
-        s = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
-        c = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-        root.getChildren().add(c);
-        gc = c.getGraphicsContext2D();
-        gc.setStroke(Color.BLUE);
-        gc.setLineWidth(2);
-        gc.setFill(Color.BLUE);
-        GameLoop.start(gc);
-
-        //Initialize Objects
-        Player p = new Player();
-        setPlayer(p);
-        
-        //load map
-        loadMap();
-
-        //should be called at last it based on player
-        EventHandler.attachEventHandlers(s);
-
-    }
-    */
-    
-    private static void init2() {
     	System.out.println("New Scene");
     	root.getChildren().clear();
         c = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -268,7 +232,7 @@ public class Sandbox {
         setPlayer(p);
         
         //load map
-        Map.Map5();
+        Map.Map1();
         
 
         //should be called at last it based on player
@@ -276,21 +240,40 @@ public class Sandbox {
 
     }
     
-    public static void stopGame() {
+    public static void stopGame(boolean victory) {
     	GameLoop.animTimer.stop();
     	root.getChildren().clear();
+    	
+   		Text tf = new Text();
+   		
+    	if(victory) {
+    		tf.setText("You've won!");
+    	}
+    	else {
+    		tf.setText("You've lost!");
+    	}
+    	tf.setFont(new Font(30));
+    	tf.setLayoutX(280);
+    	tf.setLayoutY(200);
+    	
     	Button button = new Button();
     	button.setText("Play Again");
-    	button.setOnAction(e -> init2());
+    	button.setOnAction(e -> init());
     	button.setLayoutX(280);
     	button.setLayoutY(300);
     	
     	Button button2 = new Button();
     	button2.setText("Main menu");
-    	button2.setOnAction(e -> introScreen());
+    	button2.setOnAction(e -> mainMenu());
     	button2.setLayoutX(280);
     	button2.setLayoutY(340);
-    	root.getChildren().addAll(button, button2);
+    	
+    	Button button3 = new Button();
+    	button3.setText("New User");
+    	button3.setOnAction(e -> introScreen());
+    	button3.setLayoutX(280);
+    	button3.setLayoutY(380);
+    	root.getChildren().addAll(tf, button, button2, button3);
     }
 
 
@@ -299,7 +282,6 @@ public class Sandbox {
         if(!sceneStarted){
         	initValues();
         	introScreen();
-//            init();
             sceneStarted=true;
         }
     }
@@ -322,4 +304,8 @@ public class Sandbox {
     public static Player getPlayer(){
         return sandboxPlayer;
     }
+
+	public static String getUsername() {
+		return username;
+	}
 }

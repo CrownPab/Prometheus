@@ -1,11 +1,7 @@
 package prometheus;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.Random;
-import java.util.Vector;
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import prometheus.constants.GlobalConstants;
@@ -19,7 +15,7 @@ import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 
 public class GameLoop {
-	//Test commit
+
     static double currentGameTime;
     static double oldGameTime;
     static double deltaTime;
@@ -31,14 +27,12 @@ public class GameLoop {
     }
 
     public static void start(GraphicsContext gc) {
-        GameState.gameStatus=GlobalConstants.GameStatus.Running;
         animTimer = new AnimationTimer() {
             public void handle(long currentNanoTime) {
             	oldGameTime = currentGameTime;
             	currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
             	deltaTime = currentGameTime - oldGameTime;
                 gc.clearRect(0, 0, GlobalConstants.CANVAS_WIDTH, GlobalConstants.CANVAS_WIDTH);
-                //TODO This will have to be something like, currentScene.getEntities()
                 updateGame();
                 renderGame();
             }
@@ -96,23 +90,26 @@ public class GameLoop {
             }
             
             else if(entity instanceof WizardProjectile) {
-//                ((WizardProjectile) entity).move(1, ((WizardProjectile) entity).currentDirection);
             	WizardProjectile wiz = ((WizardProjectile) entity);
                 wiz.checkCollisions((int)wiz.x.doubleValue(), (int)wiz.y.doubleValue());
             }
             
             else if(entity instanceof Wizard) { 
-				if (Math.random() < 0.005)
-					((Wizard) entity).shoot();
+            	if(Map.lvl <= 2)
+            		if (Math.random() < 0.005)
+            			((Wizard) entity).shoot();
+            	else
+            		if (Math.random() < 0.009)
+            			((Wizard) entity).shoot();
             }
             
-            else if(entity instanceof Runner && Map.lvl <= 2) { 
-				((Runner) entity).move(1, ((Runner) entity).getDirectionTo(Sandbox.sandboxPlayer));
+            else if(entity instanceof Runner) { 
+            	if(Map.lvl <= 2)
+            		((Runner) entity).move(1, ((Runner) entity).getDirectionTo(Sandbox.sandboxPlayer));
+            	else 
+            		((Runner) entity).move(2, ((Runner) entity).getDirectionTo(Sandbox.sandboxPlayer));
+
             }
-            else if(entity instanceof Runner && Map.lvl >2) { 
-				((Runner) entity).move(2, ((Runner) entity).getDirectionTo(Sandbox.sandboxPlayer));
-            }
-            
         }
         
         Map.waveProgress();

@@ -27,7 +27,7 @@ public class EventHandler {
 		}
 	}
 
-	public static List getInputList() {
+	public static List<KeyCode> getInputList() {
 		return inputList;
 	}
 }
@@ -38,9 +38,6 @@ class keyReleaseHandler implements javafx.event.EventHandler<KeyEvent> {
 
 	@Override
 	public void handle(KeyEvent evt) {
-		// System.out.println("The key released is : "+evt.getText()+" with keycode
-		// "+evt.getCode().getName());
-
 		KeyCode code = evt.getCode();
 
 		if (EventHandler.inputList.contains(code))
@@ -51,8 +48,6 @@ class keyReleaseHandler implements javafx.event.EventHandler<KeyEvent> {
 class keyPressedHandler implements javafx.event.EventHandler<KeyEvent> {
 	@Override
 	public void handle(KeyEvent evt) {
-		// System.out.println("The key pressed is : "+evt.getText()+" with keycode
-		// "+evt.getCode().getName());
 		KeyCode code = evt.getCode();
 
 		// only add once... prevent duplicates

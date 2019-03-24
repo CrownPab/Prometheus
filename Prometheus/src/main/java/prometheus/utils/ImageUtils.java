@@ -9,9 +9,7 @@ import javafx.scene.image.WritableImage;
 public class ImageUtils {
     public static Image loadImage(String path) {
         File file = new File(path);
-//        System.out.println("Loading Sprite sheet " + file.exists());
         String imagePath = file.getAbsolutePath();
-//        System.out.println("Before Imagepath " + imagePath);
         if (File.separatorChar == '\\') {
             // From Windows to Linux/Mac
             imagePath=imagePath.replace('/', File.separatorChar);
@@ -22,7 +20,6 @@ public class ImageUtils {
 
         }
         imagePath="file:"+imagePath;
-//        System.out.println("After Imagepath " + imagePath);
 
         return new Image(imagePath);
     }

@@ -33,21 +33,23 @@ public class Player implements MovingEntity, KillableEntity {
 
     public Player() {
         init(64, 64);
+        
+        name = Sandbox.getUsername();
+        stats = new PlayerStats(name);
     }
 
     public Player(int posX, int posY) {
         init(posX, posY);
-        health = 100;
         isAlive = true;
+        
+        name = Sandbox.getUsername();
+        stats = new PlayerStats(name);
     }
 
     public void init(int x, int y) {
-        name = Sandbox.username;
-        stats = new PlayerStats(name);
-        this.health = 100;
-
         positionX = x;
         positionY = y;
+        this.health = 100;
 
         playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         
@@ -111,9 +113,8 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public void die() {
-//    	GameLoop.animTimer.stop();
     	this.stats.addDeaths(1);
-    	Sandbox.stopGame();
+    	Sandbox.stopGame(false);
     }
 
     private boolean checkCollisions(int x, int y) {
@@ -121,12 +122,7 @@ public class Player implements MovingEntity, KillableEntity {
 
         for (Entity e : Sandbox.getEntities()) {
             if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
-            	playerBoundary.setPosition(positionX, positionY);
-                /*
-                System.out.println("Player x="+getPositionX()+" y="
-                        +getPositionY()+" colliding with x="+e.getPositionX()
-                        +" y="+e.getPositionY());
-                */
+//            	playerBoundary.setPosition(positionX, positionY);
                 return true;
             }
             if(e != this && isColliding(e)) {
@@ -170,6 +166,8 @@ public class Player implements MovingEntity, KillableEntity {
 	                    currentDirection = Direction.RIGHT;
                 	}
                     break;
+			default:
+				break;
             }
         }
     }
@@ -181,11 +179,6 @@ public class Player implements MovingEntity, KillableEntity {
         } else {
             health -= damage;
         }
-    }
-
-    @Override
-    public void removeFromScene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -214,8 +207,7 @@ public class Player implements MovingEntity, KillableEntity {
     }
 
 	@Override
-	public boolean onCollision(Entity e) {
-		// TODO Auto-generated method stub
-		return false;
+	public void onCollision(Entity e) {
+
 	}
 }

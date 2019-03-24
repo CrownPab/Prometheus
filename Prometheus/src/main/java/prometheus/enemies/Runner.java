@@ -1,23 +1,13 @@
 package prometheus.enemies;
 
-import javafx.animation.PathTransition;
 import javafx.scene.image.Image;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.util.Duration;
 import prometheus.GameLoop;
 import prometheus.constants.Direction;
 import prometheus.constants.GlobalConstants;
 import prometheus.entity.Entity;
 import prometheus.entity.KillableEntity;
-import prometheus.entity.MovingEntity;
 import prometheus.entity.boundedbox.RectBoundedBox;
 import prometheus.entity.player.Player;
-import prometheus.entity.staticobjects.AcidPool;
-import prometheus.entity.staticobjects.Wall;
-import prometheus.projectiles.Bubble;
-import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 import prometheus.utils.ImageUtils;
 
@@ -25,7 +15,7 @@ public class Runner implements KillableEntity {
 
     private int health;
     private boolean isAlive;
-    RectBoundedBox playerBoundary;
+    RectBoundedBox boundry;
 
     Image up;
     Image down;
@@ -54,7 +44,7 @@ public class Runner implements KillableEntity {
         positionX = x;
         positionY = y;
 
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        boundry = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         
         Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
         down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
@@ -77,9 +67,8 @@ public class Runner implements KillableEntity {
 
     @Override
     public boolean isColliding(Entity b) {
-       // playerBoundary.setPosition(positionX, positionY);
         RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
-        return playerBoundary.checkCollision(otherEntityBoundary);
+        return boundry.checkCollision(otherEntityBoundary);
     }
 
     @Override
@@ -127,12 +116,7 @@ public class Runner implements KillableEntity {
             health -= damage;
         }
     }
-
-    @Override
-    public void removeFromScene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public int getPositionX() {
         return positionX;
@@ -145,13 +129,13 @@ public class Runner implements KillableEntity {
 
     @Override
     public RectBoundedBox getBoundingBox() {
-        playerBoundary.setPosition(positionX, positionY);
-        return playerBoundary;
+        boundry.setPosition(positionX, positionY);
+        return boundry;
     }
 
     @Override
     public boolean isPlayerCollisionFriendly() {
-        return false;
+        return true;
     }
     public Direction getDirectionTo(Entity e) {
 
@@ -198,12 +182,10 @@ public class Runner implements KillableEntity {
 	}
    
     @Override
-	public boolean onCollision(Entity e) {
+	public void onCollision(Entity e) {
 		if(e instanceof Player) {
 			((Player) e).reduceHealth(1);
 		}
-		
-		return true;
 	}
     
 	public void move(int steps, Direction direction) {
@@ -258,7 +240,7 @@ public class Runner implements KillableEntity {
 	}
 	public boolean checkCollisions(int x, int y) {
     	
-    	playerBoundary.setPosition(x, y);
+    	boundry.setPosition(x, y);
     	
         for (Entity e : Sandbox.getEntities()) {
             if(e != this && isColliding(e)) {

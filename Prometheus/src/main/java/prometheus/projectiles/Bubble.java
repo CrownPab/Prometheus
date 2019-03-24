@@ -53,11 +53,6 @@ public class Bubble implements MovingEntity{
     }
 
     @Override
-    public void removeFromScene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public int getPositionX() {
         return positionX;
     }
@@ -78,7 +73,7 @@ public class Bubble implements MovingEntity{
     }
 
 	@Override
-	public boolean onCollision(Entity e) {
+	public void onCollision(Entity e) {
 		if(e instanceof Wall) {
 			this.alive = false;
 		}
@@ -93,8 +88,6 @@ public class Bubble implements MovingEntity{
 			((Runner) e).reduceHealth(10);
 			this.alive = false;
 		}
-		
-		return true;
 	}
 	
     private boolean checkCollisions(int x, int y) {

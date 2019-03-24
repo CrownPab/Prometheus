@@ -2,16 +2,10 @@ package prometheus.projectiles;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.util.Duration;
-import prometheus.GameLoop;
 import prometheus.constants.Direction;
 import prometheus.constants.GlobalConstants;
 import prometheus.entity.Entity;
@@ -62,12 +56,7 @@ public class WizardProjectile implements MovingEntity{
 
     @Override
     public void draw() {
-    	Sandbox.getGraphicsContext().fillOval(x.doubleValue()+5, y.doubleValue()+5, 10, 10);
-    }
-
-    @Override
-    public void removeFromScene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	Sandbox.getGraphicsContext().fillOval(x.doubleValue()+10, y.doubleValue()+10, 10, 10);
     }
 
     @Override
@@ -91,7 +80,7 @@ public class WizardProjectile implements MovingEntity{
     }
 
 	@Override
-	public boolean onCollision(Entity e) {
+	public void onCollision(Entity e) {
 		if(e instanceof Wall) {
 			this.alive = false;
 		}
@@ -102,8 +91,6 @@ public class WizardProjectile implements MovingEntity{
 			((Player) e).reduceHealth(10);
 			this.alive = false;
 		}
-		
-		return true;
 	}
 	
     public boolean checkCollisions(int x, int y) {
@@ -123,10 +110,10 @@ public class WizardProjectile implements MovingEntity{
     	 double maxDistance = Math.sqrt(Math.pow(GlobalConstants.CANVAS_WIDTH, 2) + Math.pow(GlobalConstants.CANVAS_HEIGHT, 2));
 
     	 Timeline timeline = new Timeline(
-            new KeyFrame(Duration.seconds(0),
-                    new KeyValue(x, this.positionX),
-                    new KeyValue(y, this.positionY)
-            ),
+//            new KeyFrame(Duration.seconds(0),
+//                    new KeyValue(x, this.positionX + 5),
+//                    new KeyValue(y, this.positionY + 5)
+//            ),
             new KeyFrame(Duration.seconds(((distance/maxDistance)) * 10),
                     new KeyValue(x, e.getPositionX()),
                     new KeyValue(y, e.getPositionY())
@@ -139,55 +126,6 @@ public class WizardProjectile implements MovingEntity{
 
 	@Override
 	public void move(int steps, Direction direction) {
-		steps *= GameLoop.getDeltaTime();
-
-		if (steps == 0) {
-			return;
-		} else {
-			switch (direction) {
-			case UP:
-				positionY -= steps;
-				currentDirection = Direction.UP;
-				break;
-			case DOWN:
-				positionY += steps;
-				currentDirection = Direction.DOWN;
-				break;
-			case LEFT:
-				positionX -= steps;
-				currentDirection = Direction.LEFT;
-				break;
-			case RIGHT:
-				positionX += steps;
-				currentDirection = Direction.RIGHT;
-				break;
-			case DOWN_RIGHT:
-				positionX += steps;
-				positionY += steps;
-				currentDirection = Direction.DOWN_RIGHT;
-				break;
-			case DOWN_LEFT:
-				positionX -= steps;
-				positionY += steps;
-				currentDirection = Direction.DOWN_LEFT;
-				break;
-			case UP_LEFT:
-				positionX -= steps;
-				positionY -= steps;
-				currentDirection = Direction.UP_LEFT;
-				break;
-			case UP_RIGHT:
-				positionX += steps;
-				positionY -= steps;
-				currentDirection = Direction.UP_RIGHT;
-				break;
-			default:
-				break;
-			}
-			checkCollisions(positionX, positionY);
-		}
-
+		
 	}
-    
-
 }
