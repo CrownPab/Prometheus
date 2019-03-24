@@ -20,12 +20,12 @@ public class Wall implements StaticEntity {
     	positionX = x;
     	positionY = y;
 
-    	width = 16;
-    	height = 16;
+    	width = 32;
+    	height = 32;
     	
         Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
         sprite  = ImageUtils.crop(img, 348, 123, 16, 16);
-    	boundry = new RectBoundedBox(positionX, positionY, width, height);
+    	boundry = new RectBoundedBox(positionX-6, positionY-4, width, height);
     }
 
     @Override

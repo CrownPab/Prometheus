@@ -48,7 +48,7 @@ public class Wizard implements KillableEntity {
         positionX = x;
         positionY = y;
 
-        boundry = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        boundry = new RectBoundedBox(positionX-5, positionY-5, GlobalConstants.PLAYER_WIDTH+5, GlobalConstants.PLAYER_HEIGHT+5);
         
         Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
 //        down  = ImageUtils.crop(img, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);

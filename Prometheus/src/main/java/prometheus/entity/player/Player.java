@@ -51,7 +51,7 @@ public class Player implements MovingEntity, KillableEntity {
         positionY = y;
         this.health = 100;
 
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        playerBoundary = new RectBoundedBox(positionX-5, positionY-5, GlobalConstants.PLAYER_WIDTH+5, GlobalConstants.PLAYER_HEIGHT+5);
         
         Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
         down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);

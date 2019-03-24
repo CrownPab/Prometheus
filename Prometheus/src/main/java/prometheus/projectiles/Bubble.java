@@ -34,7 +34,7 @@ public class Bubble implements MovingEntity{
     		d = Direction.UP;
     	this.currentDirection = d;
     	this.alive = true;
-        entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
+        entityBoundary = new RectBoundedBox(positionX-5, positionY-5, width+5, height+5);
     }
     
     public boolean isAlive(){
