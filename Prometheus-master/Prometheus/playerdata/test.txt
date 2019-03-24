@@ -1,0 +1,2 @@
+kills=10
+deaths=8
