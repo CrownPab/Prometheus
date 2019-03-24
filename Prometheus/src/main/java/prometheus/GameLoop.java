@@ -17,7 +17,6 @@ import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 
 public class GameLoop {
-	//Test commit
     static double currentGameTime;
     static double oldGameTime;
     static double deltaTime;

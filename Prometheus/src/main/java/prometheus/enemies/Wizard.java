@@ -123,6 +123,7 @@ public class Wizard implements KillableEntity {
     @Override
     public void die() {
     	this.isAlive = false;
+    	Sandbox.getPlayer().getStats().addKills(1);
     }
 
     @Override

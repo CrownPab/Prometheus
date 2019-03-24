@@ -1,8 +1,8 @@
 package prometheus.entity.player;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import prometheus.GameLoop;
+import prometheus.PlayerStats;
 import prometheus.constants.Direction;
 import prometheus.constants.GlobalConstants;
 import prometheus.entity.Entity;
@@ -29,6 +29,7 @@ public class Player implements MovingEntity, KillableEntity {
     public int positionY = 0;
 
     String name;
+    PlayerStats stats;
 
     public Player() {
         init(64, 64);
@@ -41,7 +42,8 @@ public class Player implements MovingEntity, KillableEntity {
     }
 
     private void init(int x, int y) {
-        name = "Player";
+        name = Sandbox.username;
+        stats = new PlayerStats(name);
         this.health = 100;
 
         positionX = x;
@@ -110,6 +112,7 @@ public class Player implements MovingEntity, KillableEntity {
     @Override
     public void die() {
 //    	GameLoop.animTimer.stop();
+    	this.stats.addDeaths(1);
     	Sandbox.stopGame();
     }
 
@@ -193,6 +196,10 @@ public class Player implements MovingEntity, KillableEntity {
     @Override
     public int getPositionY() {
         return positionY;
+    }
+    
+    public PlayerStats getStats() {
+    	return this.stats;
     }
 
     @Override
