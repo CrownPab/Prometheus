@@ -95,12 +95,14 @@ public class GameLoop {
             }
             
             else if(entity instanceof Wizard) { 
-            	if(Map.lvl <= 2)
+            	if(Map.lvl <= 2) {
             		if (Math.random() < 0.005)
             			((Wizard) entity).shoot();
-            	else
-            		if (Math.random() < 0.009)
+            	}
+            	else {
+            		if (Math.random() < 0.01)
             			((Wizard) entity).shoot();
+            	}
             }
             
             else if(entity instanceof Runner) { 

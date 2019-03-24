@@ -27,7 +27,7 @@ public class Map
 		mapLayout = new int[20][20];
 		
 		//Make new player in safe location
-		Sandbox.sandboxPlayer.init(320,320);
+		Sandbox.sandboxPlayer.init(340,340);
 		
     	//Border
 		for(int i = 0; i < SCENE_WIDTH; i += 32){

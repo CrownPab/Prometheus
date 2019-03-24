@@ -1,7 +1,5 @@
 package prometheus.projectiles;
 
-import java.awt.Paint;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,6 +15,7 @@ import prometheus.entity.boundedbox.RectBoundedBox;
 import prometheus.entity.player.Player;
 import prometheus.entity.staticobjects.AcidPool;
 import prometheus.entity.staticobjects.Wall;
+import prometheus.maps.Map;
 import prometheus.scenes.Sandbox;
 
 public class WizardProjectile implements MovingEntity{
@@ -85,10 +84,10 @@ public class WizardProjectile implements MovingEntity{
 
 	@Override
 	public void onCollision(Entity e) {
-		if(e instanceof Wall) {
+		if(e instanceof Wall && Map.lvl < 4) {
 			this.alive = false;
 		}
-		if(e instanceof AcidPool) {
+		if(e instanceof AcidPool && Map.lvl < 4) {
 			this.alive = false;
 		}
 		if(e instanceof Player) {
