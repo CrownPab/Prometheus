@@ -106,6 +106,7 @@ public class Runner implements KillableEntity {
     @Override
     public void die() {
     	this.isAlive = false;
+    	Sandbox.getPlayer().getStats().addKills(1);
     }
 
     @Override
@@ -137,6 +138,7 @@ public class Runner implements KillableEntity {
     public boolean isPlayerCollisionFriendly() {
         return true;
     }
+    
     public Direction getDirectionTo(Entity e) {
 
 		int deltaX = e.getPositionX() - this.positionX;

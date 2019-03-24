@@ -29,13 +29,15 @@ public class WizardProjectile implements MovingEntity{
     public boolean alive;
     public DoubleProperty x  = new SimpleDoubleProperty();
     public DoubleProperty y  = new SimpleDoubleProperty();
+    public int baseSpeed;
 
     
-    public WizardProjectile(int posx, int posy, Direction d) {
+    public WizardProjectile(int posx, int posy, Direction d, int baseSpeed) {
         positionX = posx;
     	positionY = posy;
     	width = 16;
     	height = 16;
+    	this.baseSpeed = baseSpeed;
     	this.currentDirection = d;
     	this.alive = true;
         entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
@@ -117,7 +119,7 @@ public class WizardProjectile implements MovingEntity{
 //                    new KeyValue(x, this.positionX + 5),
 //                    new KeyValue(y, this.positionY + 5)
 //            ),
-            new KeyFrame(Duration.seconds(((distance/maxDistance)) * 10),
+            new KeyFrame(Duration.seconds(((distance/maxDistance)) * this.baseSpeed),
                     new KeyValue(x, e.getPositionX()),
                     new KeyValue(y, e.getPositionY())
             )

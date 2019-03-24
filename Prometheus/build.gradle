@@ -13,6 +13,17 @@ configure(runApp) {
     description = 'Run file through main class'
 }
 
+task getDeps(type: Copy) {
+  from sourceSets.main.runtimeClasspath
+  into 'runtime/'
+}
+
+configure(getDeps) {   
+    group = BasePlugin.BUILD_GROUP
+    description = 'Download all dependencies'
+}
+
+
 dependencies {
 
 }
