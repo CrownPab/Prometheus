@@ -95,13 +95,18 @@ public class GameLoop {
             }
             
             else if(entity instanceof Wizard) { 
+            	Wizard wiz = ((Wizard) entity);
             	if(Map.lvl <= 2) {
-            		if (Math.random() < 0.005)
-            			((Wizard) entity).shoot();
+            		if((System.currentTimeMillis() - wiz.lastShot) >= 1000) {
+            			((Wizard) entity).shoot(10);
+            			wiz.lastShot = System.currentTimeMillis();
+            		}
             	}
             	else {
-            		if (Math.random() < 0.01)
-            			((Wizard) entity).shoot();
+            		if((System.currentTimeMillis() - wiz.lastShot) >= 500) {
+            			((Wizard) entity).shoot(5);
+            			wiz.lastShot = System.currentTimeMillis();
+            		}
             	}
             }
             

@@ -27,6 +27,7 @@ public class Wizard implements KillableEntity {
     public int positionY = 0;
 
     String name;
+	public long lastShot;
 
     public Wizard() {
         init(64,64);
@@ -38,8 +39,8 @@ public class Wizard implements KillableEntity {
         isAlive = true;
     }
     
-    public void shoot() {    
-    	Sandbox.addEntityToGame(new WizardProjectile(positionX, positionY, getDirectionTo(Sandbox.getPlayer())));
+    public void shoot(int speed) {    
+    	Sandbox.addEntityToGame(new WizardProjectile(positionX, positionY, getDirectionTo(Sandbox.getPlayer()), speed));
     }
 
     private void init(int x, int y) {
@@ -58,7 +59,7 @@ public class Wizard implements KillableEntity {
         right  = ImageUtils.crop(img, 271, 123, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         up = ImageUtils.crop(img, 331, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         left = ImageUtils.crop(img, 301, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        shoot();
+        this.lastShot = System.currentTimeMillis();
     }
 
     public int getHealth() {
