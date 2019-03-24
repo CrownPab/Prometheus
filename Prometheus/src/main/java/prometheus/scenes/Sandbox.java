@@ -42,7 +42,7 @@ public class Sandbox {
     static Canvas c;
     static GraphicsContext gc;
     private static boolean sceneStarted;
-    static Player sandboxPlayer;
+    public static Player sandboxPlayer;
     public static String username;
     static{
         sceneStarted=false;
@@ -267,11 +267,8 @@ public class Sandbox {
         Player p = new Player();
         setPlayer(p);
         
-        Wizard w = new Wizard(32,32);
-    	addEntityToGame(w);
-        
         //load map
-        Map.Map2();
+        Map.Map1();
         
 
         //should be called at last it based on player

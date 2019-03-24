@@ -13,12 +13,15 @@ import prometheus.entity.Entity;
 import prometheus.entity.KillableEntity;
 import prometheus.entity.MovingEntity;
 import prometheus.entity.boundedbox.RectBoundedBox;
+import prometheus.entity.player.Player;
+import prometheus.entity.staticobjects.AcidPool;
+import prometheus.entity.staticobjects.Wall;
 import prometheus.projectiles.Bubble;
 import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 import prometheus.utils.ImageUtils;
 
-public class Wizard implements KillableEntity {
+public class Runner implements KillableEntity {
 
     private int health;
     private boolean isAlive;
@@ -36,37 +39,28 @@ public class Wizard implements KillableEntity {
 
     String name;
 
-    public Wizard() {
+    public Runner() {
         init(64,64);
     }
 
-    public Wizard(int posX, int posY) {
+    public Runner(int posX, int posY) {
         init(posX, posY);
         health = 10;
         isAlive = true;
     }
     
-    public void shoot() {    	
-    	Sandbox.addEntityToGame(new WizardProjectile(positionX, positionY, getDirectionTo(Sandbox.getPlayer())));
-    }
-
     private void init(int x, int y) {
-        name = "Wizard";
+        name = "Runner";
         positionX = x;
         positionY = y;
 
         playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         
         Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-//        down  = ImageUtils.crop(img, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        left  = ImageUtils.crop(img, 30, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        up = ImageUtils.crop(img, 60, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        right = ImageUtils.crop(img, 90, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         right  = ImageUtils.crop(img, 271, 123, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         up = ImageUtils.crop(img, 331, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         left = ImageUtils.crop(img, 301, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        shoot();
     }
 
     public int getHealth() {
@@ -123,7 +117,6 @@ public class Wizard implements KillableEntity {
     @Override
     public void die() {
     	this.isAlive = false;
-    	Sandbox.getPlayer().getStats().addKills(1);
     }
 
     @Override
@@ -160,14 +153,8 @@ public class Wizard implements KillableEntity {
     public boolean isPlayerCollisionFriendly() {
         return false;
     }
+    public Direction getDirectionTo(Entity e) {
 
-	@Override
-	public boolean onCollision(Entity e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public Direction getDirectionTo(Entity e) {
 		int deltaX = e.getPositionX() - this.positionX;
 		int deltaY = e.getPositionY() - this.positionY;
 		
@@ -209,4 +196,75 @@ public class Wizard implements KillableEntity {
 		
 		return Direction.DOWN;
 	}
+   
+    @Override
+	public boolean onCollision(Entity e) {
+		if(e instanceof Player) {
+			((Player) e).reduceHealth(1);
+		}
+		
+		return true;
+	}
+    
+	public void move(int steps, Direction direction) {
+		steps *= GameLoop.getDeltaTime();
+
+		if (steps == 0) {
+			return;
+		} else {
+			switch (direction) {
+			case UP:
+				positionY -= steps;
+				currentDirection = Direction.UP;
+				break;
+			case DOWN:
+				positionY += steps;
+				currentDirection = Direction.DOWN;
+				break;
+			case LEFT:
+				positionX -= steps;
+				currentDirection = Direction.LEFT;
+				break;
+			case RIGHT:
+				positionX += steps;
+				currentDirection = Direction.RIGHT;
+				break;
+			case DOWN_RIGHT:
+				positionX += steps;
+				positionY += steps;
+				currentDirection = Direction.DOWN_RIGHT;
+				break;
+			case DOWN_LEFT:
+				positionX -= steps;
+				positionY += steps;
+				currentDirection = Direction.DOWN_LEFT;
+				break;
+			case UP_LEFT:
+				positionX -= steps;
+				positionY -= steps;
+				currentDirection = Direction.UP_LEFT;
+				break;
+			case UP_RIGHT:
+				positionX += steps;
+				positionY -= steps;
+				currentDirection = Direction.UP_RIGHT;
+				break;
+			default:
+				break;
+			}
+			checkCollisions(positionX, positionY);
+		}
+
+	}
+	public boolean checkCollisions(int x, int y) {
+    	
+    	playerBoundary.setPosition(x, y);
+    	
+        for (Entity e : Sandbox.getEntities()) {
+            if(e != this && isColliding(e)) {
+            	this.onCollision(e);
+            }
+        }
+        return false;
+    }
 }

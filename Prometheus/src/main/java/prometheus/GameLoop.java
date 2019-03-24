@@ -9,14 +9,17 @@ import java.util.Vector;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import prometheus.constants.GlobalConstants;
+import prometheus.enemies.Runner;
 import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.gamecontroller.InputManager;
+import prometheus.maps.Map;
 import prometheus.projectiles.Bubble;
 import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
 
 public class GameLoop {
+	//Test commit
     static double currentGameTime;
     static double oldGameTime;
     static double deltaTime;
@@ -52,6 +55,7 @@ public class GameLoop {
         ArrayList<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
   
+        
         while (it.hasNext()) {
             Entity entity = it.next();
             if(entity instanceof Bubble) {
@@ -72,6 +76,16 @@ public class GameLoop {
                 boolean alive = ((Wizard) entity).isAlive();
                 if(!alive){
                     it.remove();
+                    Map.mobCount--;
+                    //acidDrop()
+                }
+            }
+            else if(entity instanceof Runner) {
+                boolean alive = ((Runner) entity).isAlive();
+                if(!alive){
+                    it.remove();
+                    Map.mobCount--;
+                    //acidDrop();
                 }
             }
         }
@@ -87,11 +101,21 @@ public class GameLoop {
                 wiz.checkCollisions((int)wiz.x.doubleValue(), (int)wiz.y.doubleValue());
             }
             
-            else if(entity instanceof Wizard) {
+            else if(entity instanceof Wizard) { 
 				if (Math.random() < 0.005)
 					((Wizard) entity).shoot();
             }
+            
+            else if(entity instanceof Runner && Map.lvl <= 2) { 
+				((Runner) entity).move(1, ((Runner) entity).getDirectionTo(Sandbox.sandboxPlayer));
+            }
+            else if(entity instanceof Runner && Map.lvl >2) { 
+				((Runner) entity).move(2, ((Runner) entity).getDirectionTo(Sandbox.sandboxPlayer));
+            }
+            
         }
+        
+        Map.waveProgress();
     }
 
     public static void renderGame() {
@@ -99,5 +123,6 @@ public class GameLoop {
             e.draw();
         }
     }
+    
 
 }

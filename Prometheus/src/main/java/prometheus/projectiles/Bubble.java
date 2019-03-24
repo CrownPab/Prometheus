@@ -2,6 +2,7 @@ package prometheus.projectiles;
 
 import prometheus.GameLoop;
 import prometheus.constants.Direction;
+import prometheus.enemies.Runner;
 import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
 import prometheus.entity.MovingEntity;
@@ -86,6 +87,10 @@ public class Bubble implements MovingEntity{
 		}
 		if(e instanceof Wizard) {
 			((Wizard) e).reduceHealth(10);
+			this.alive = false;
+		}
+		if(e instanceof Runner) {
+			((Runner) e).reduceHealth(10);
 			this.alive = false;
 		}
 		

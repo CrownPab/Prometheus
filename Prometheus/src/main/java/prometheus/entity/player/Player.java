@@ -41,7 +41,7 @@ public class Player implements MovingEntity, KillableEntity {
         isAlive = true;
     }
 
-    private void init(int x, int y) {
+    public void init(int x, int y) {
         name = Sandbox.username;
         stats = new PlayerStats(name);
         this.health = 100;
