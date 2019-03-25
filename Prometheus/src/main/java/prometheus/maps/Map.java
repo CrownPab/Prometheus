@@ -27,7 +27,7 @@ public class Map
 		mapLayout = new int[20][20];
 		
 		//Make new player in safe location
-		Sandbox.sandboxPlayer.init(340,340);
+		Sandbox.sandboxPlayer.init(350,350);
 		
     	//Border
 		for(int i = 0; i < SCENE_WIDTH; i += 32){
@@ -48,8 +48,8 @@ public class Map
     		}
     	}
 		//Checkerboard
-		for(int i = 48; i < SCENE_WIDTH-32; i += 128){
-    		for(int j = 48; j < SCENE_HEIGHT-32; j += 128){
+		for(int i = 64; i < SCENE_WIDTH-32; i += 128){
+    		for(int j = 64; j < SCENE_HEIGHT-32; j += 128){
     				walls.add(new Wall(i, j));
     				mapLayout[i/32][j/32] = 1;
     		}
