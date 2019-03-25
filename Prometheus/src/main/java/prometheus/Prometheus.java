@@ -1,5 +1,10 @@
 package prometheus;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,9 +12,21 @@ import prometheus.constants.GlobalConstants;
 import prometheus.scenes.Sandbox;
 
 public class Prometheus extends Application {
-
+	
+	public static Socket socket;
+	public static DataOutputStream toServer = null;
+	public static DataInputStream fromServer = null;
+	
     @Override
     public void start(Stage primaryStage) {
+    	try {
+			socket = new Socket("localhost", 2500);
+			fromServer = new DataInputStream(socket.getInputStream());
+			toServer = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
         primaryStage.setTitle(GlobalConstants.GAME_NAME);
         Sandbox.setupScene();
         Scene s = Sandbox.getScene();
