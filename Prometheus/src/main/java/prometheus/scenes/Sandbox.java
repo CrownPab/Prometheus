@@ -208,7 +208,7 @@ public class Sandbox {
 		Text stat2 = new Text("Deaths: " + FileUtils.getPlayerDeaths(username));
 		// THis is a placeholder image
 		// We are going to put the sprite of the character here
-		ImageView imageView = new ImageView("file:///C:\\coding\\csci2020u\\InterfaceV2\\src\\application\\china.gif");
+		ImageView imageView = new ImageView("file:///C:\\Users\\G\\git\\Prometheus\\Prometheus\\Prometheus\\Resources\\img\\sprites\\blobMain.png");
 		pane.getStyleClass().add("root");
 		imageView.setX(35);
 		imageView.setY(1);
