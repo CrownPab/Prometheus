@@ -13,6 +13,8 @@ public class Prometheus extends Application {
         primaryStage.setTitle(GlobalConstants.GAME_NAME);
         Sandbox.setupScene();
         Scene s = Sandbox.getScene();
+        String css = Prometheus.class.getResource("style.css").toExternalForm(); 
+        s.getStylesheets().add(css);
         primaryStage.setScene(s);
         primaryStage.show();
     }

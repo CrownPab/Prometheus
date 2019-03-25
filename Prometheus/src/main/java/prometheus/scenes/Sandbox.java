@@ -85,9 +85,11 @@ public class Sandbox {
         	mainMenu();
         });
         
+        
+        
         hb.getChildren().addAll(label1, tf);
         hb.setSpacing(10);
-        
+        hb.getStyleClass().add("root");
         root.getChildren().add(hb);
     }
     
@@ -103,18 +105,28 @@ public class Sandbox {
 //		MediaPlayer player = new MediaPlayer(new Media(uriString));
 //		player.play();
 		
-		BorderPane borderPane = new BorderPane(); // borderpane is being used for the main menu screen
+		VBox pane = new VBox(); // borderpane is being used for the main menu screen
 		TextArea leaderBoard = new TextArea(); // this text area will be used for the leaderboard
-		VBox vbox = new VBox(20); // creates vbox with spacing 20
 		
-		leaderBoard.setFont(new Font(20));
+		HBox vbox = new HBox(235); // creates vbox with spacing 20
+		
+		Pane pane2 = new Pane();
+		
+		leaderBoard.setFont(new Font(15));
 		for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
 			leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
-		
-		
+		leaderBoard.setStyle("-fx-background-color:orangered;");
+		Text leadBoard = new Text("Leaderboard");
+		leadBoard.getStyleClass().add("text1");
+		leadBoard.setX(210);
+		leadBoard.setY(375);
+		pane2.getChildren().add(leadBoard);
 		Button playGame = new Button("Play Game"); // users will click this button to enter the game
+		playGame.getStyleClass().add("green");
 		Button stats = new Button("Stats"); // users will click this button to view their stats
+		stats.getStyleClass().add("green");
 		Button credits = new Button("Credits"); // will display all personal that worked on the game for user to see
+		credits.getStyleClass().add("green");
 		playGame.setOnAction(a -> init());
 		
 		credits.setOnAction(a -> credits(outStage));
@@ -124,15 +136,15 @@ public class Sandbox {
 		
 		vbox.getChildren().addAll(playGame, stats, credits); // inserts all three buttons into vbox
 
-		borderPane.setLeft(vbox); // sets postion of the vbox for the on the borderpane
-
-		borderPane.setRight(leaderBoard); // sets the position of the leaderboard on the borderpane
-		root.getChildren().addAll(borderPane);
+		pane.getChildren().addAll(vbox,pane2,leaderBoard);
+		root.getChildren().addAll(pane);
+		vbox.getStyleClass().add("root");
+		pane.getStyleClass().add("root");
     }
     
 	public static void credits(Stage outStage) {
 		Pane pane = new Pane();
-
+		pane.getStyleClass().add("root");
 		Text credit1 = new Text("Atharva Shinde");
 		Text credit2 = new Text("Gagandeep Pabla");
 		Text credit3 = new Text("Lucas Simone");
@@ -197,7 +209,7 @@ public class Sandbox {
 		// THis is a placeholder image
 		// We are going to put the sprite of the character here
 		ImageView imageView = new ImageView("file:///C:\\coding\\csci2020u\\InterfaceV2\\src\\application\\china.gif");
-
+		pane.getStyleClass().add("root");
 		imageView.setX(35);
 		imageView.setY(1);
 
