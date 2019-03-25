@@ -5,6 +5,7 @@ import static prometheus.constants.GlobalConstants.CANVAS_WIDTH;
 import static prometheus.constants.GlobalConstants.SCENE_HEIGHT;
 import static prometheus.constants.GlobalConstants.SCENE_WIDTH;
 
+import javafx.geometry.Insets;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
@@ -21,6 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -71,10 +73,17 @@ public class Sandbox {
 	private static void initValues() {
         root = new Group();
         s = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+    	
 	}
 	
     private static void introScreen() {
         root.getChildren().clear();
+        GridPane pane = new GridPane();
+        pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+        pane.setHgap(5.5);
+        pane.setVgap(5.5);
+        pane.getStyleClass().add("root");
+        Text tex = new Text("");
         Label label1 = new Label("Enter a username:");
         HBox hb = new HBox();
         
@@ -86,13 +95,14 @@ public class Sandbox {
         	root.getChildren().clear();
         	mainMenu();
         });
+        tf.setPrefWidth(45);
+        pane.add(tex, 100, 100);
+        pane.add(tf, 40, 70);
+        pane.add(label1, 40, 69);
         
+       
         
-        
-        hb.getChildren().addAll(label1, tf);
-        hb.setSpacing(10);
-        hb.getStyleClass().add("root");
-        root.getChildren().add(hb);
+        root.getChildren().add(pane);
     }
     
     public static void mainMenu() {

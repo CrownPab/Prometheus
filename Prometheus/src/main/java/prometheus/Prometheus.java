@@ -16,6 +16,7 @@ public class Prometheus extends Application {
         String css = Prometheus.class.getResource("style.css").toExternalForm(); 
         s.getStylesheets().add(css);
         primaryStage.setScene(s);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
