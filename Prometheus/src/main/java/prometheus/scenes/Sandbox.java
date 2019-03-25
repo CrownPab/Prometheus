@@ -82,11 +82,12 @@ public class Sandbox {
         pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
         pane.setHgap(5.5);
         pane.setVgap(5.5);
-        pane.getStyleClass().add("root");
+        pane.getStyleClass().add("root2");
         Text tex = new Text("");
-        Label label1 = new Label("Enter a username:");
-        HBox hb = new HBox();
-        
+        Label label1 = new Label("                     Enter a username:");
+        HBox hb = new HBox(10);
+        VBox vb = new VBox(5);
+        label1.getStyleClass().add("text2");
         TextField tf = new TextField();
         tf.setPromptText("Enter a Username:");
         tf.setOnAction(e -> {
@@ -95,10 +96,14 @@ public class Sandbox {
         	root.getChildren().clear();
         	mainMenu();
         });
-        tf.setPrefWidth(45);
+        tf.setPrefWidth(100);
+        hb.getChildren().addAll(label1,tf);
+        ImageView imageView = new ImageView(ImageUtils.loadImage("Resources\\img\\Blob\\Blob\\PrometheusBackground.png"));
+        vb.getChildren().addAll(hb,imageView);
+       
+        
         pane.add(tex, 100, 100);
-        pane.add(tf, 40, 70);
-        pane.add(label1, 40, 69);
+        pane.add(vb,0,0);
         
        
         
@@ -126,7 +131,7 @@ public class Sandbox {
 		
 		leaderBoard.setFont(new Font(15));
 		for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
-			leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
+		leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
 		leaderBoard.setStyle("-fx-background-color:orangered;");
 		Text leadBoard = new Text("Leaderboard");
 		leadBoard.getStyleClass().add("text1");
@@ -150,8 +155,8 @@ public class Sandbox {
 
 		pane.getChildren().addAll(vbox,pane2,leaderBoard);
 		root.getChildren().addAll(pane);
-		vbox.getStyleClass().add("root");
-		pane.getStyleClass().add("root");
+		vbox.getStyleClass().add("root2");
+		pane.getStyleClass().add("root2");
     }
     
 	public static void credits(Stage outStage) {

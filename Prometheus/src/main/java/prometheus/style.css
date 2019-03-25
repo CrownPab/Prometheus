@@ -18,7 +18,7 @@
 .text1 {
   -fx-font-size: 32px;
  -fx-font-family: "Arial Black";
- -fx-fill: #818181;
+ -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, white 0%, red 50%);
  -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 .text2 {
@@ -26,5 +26,12 @@
     -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);
     -fx-stroke: black;
     -fx-stroke-width: 1;
-    
+
+}
+.root2{
+  -fx-background-image: url("DungeonFloor1.png");
+}
+.label{
+  -fx-font: 20px Tahoma;
+  -fx-fill: white;
 }
