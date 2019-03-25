@@ -276,7 +276,7 @@ public class Sandbox {
     		tf.setText("You've won!");
     	}
     	else {
-    		tf.setText("You've lost!");
+    		tf.setText("You have lost!");
     	}
     	tf.setFont(new Font(30));
     	tf.setLayoutX(280);
