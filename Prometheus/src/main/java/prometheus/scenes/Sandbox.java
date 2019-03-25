@@ -8,6 +8,8 @@ import static prometheus.constants.GlobalConstants.SCENE_WIDTH;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
+import javafx.scene.image.Image;
+
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -38,6 +40,7 @@ public class Sandbox {
 
     static Scene s;
     static Group root;
+    public static Image health;
     static Canvas c;
     static GraphicsContext gc;
     private static boolean sceneStarted;

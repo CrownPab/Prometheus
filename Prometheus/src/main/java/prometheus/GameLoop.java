@@ -8,11 +8,13 @@ import prometheus.constants.GlobalConstants;
 import prometheus.enemies.Runner;
 import prometheus.enemies.Wizard;
 import prometheus.entity.Entity;
+import prometheus.entity.player.Player;
 import prometheus.gamecontroller.InputManager;
 import prometheus.maps.Map;
 import prometheus.projectiles.Bubble;
 import prometheus.projectiles.WizardProjectile;
 import prometheus.scenes.Sandbox;
+import prometheus.utils.ImageUtils;
 
 public class GameLoop {
 
@@ -48,6 +50,7 @@ public class GameLoop {
         InputManager.handlePlayerMovements();
         ArrayList<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
+        	
   
         
         while (it.hasNext()) {
@@ -125,6 +128,48 @@ public class GameLoop {
     public static void renderGame() {
         for (Entity e : Sandbox.getEntities()) {
             e.draw();
+        }
+        if((Sandbox.sandboxPlayer.getHealth()>=90) && (Sandbox.sandboxPlayer.getHealth()<=100))
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthFull.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        	
+        }else if(Sandbox.sandboxPlayer.getHealth()>=80 && Sandbox.sandboxPlayer.getHealth()<=89)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthNine.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=70 && Sandbox.sandboxPlayer.getHealth()<=79)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthEight.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=60 && Sandbox.sandboxPlayer.getHealth()<=69)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthSeven.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=50 && Sandbox.sandboxPlayer.getHealth()<=59)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthSix.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=40 && Sandbox.sandboxPlayer.getHealth()<=49)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthFive.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=30 && Sandbox.sandboxPlayer.getHealth()<=39)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthFour.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=20 && Sandbox.sandboxPlayer.getHealth()<=29)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthThree.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);;
+        }else if(Sandbox.sandboxPlayer.getHealth()>=10 && Sandbox.sandboxPlayer.getHealth()<=19)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthTwo.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
+        }else if(Sandbox.sandboxPlayer.getHealth()>=0 && Sandbox.sandboxPlayer.getHealth()<=9)
+        {
+        	Sandbox.health  = ImageUtils.loadImage("Resources/img/healthOne.png");
+        	Sandbox.getGraphicsContext().drawImage(Sandbox.health, 0,0,150,40);
         }
     }
     
