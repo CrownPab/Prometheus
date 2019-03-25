@@ -1,2 +1,2 @@
-kills=1
-deaths=0
+kills=309
+deaths=28

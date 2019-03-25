@@ -23,9 +23,9 @@ public class Wall implements StaticEntity {
     	width = 32;
     	height = 32;
     	
-        Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-        sprite  = ImageUtils.crop(img, 348, 123, 16, 16);
-    	boundry = new RectBoundedBox(positionX-6, positionY-4, width, height);
+        sprite = ImageUtils.loadImage("Resources/img/sprites/wall.png");
+        //sprite  = ImageUtils.crop(img, 348, 123, 16, 16);
+    	boundry = new RectBoundedBox(positionX-6, positionY-4, width+5, height);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Wall implements StaticEntity {
 
     @Override
     public void draw() {
-    	Sandbox.getGraphicsContext().drawImage(sprite, positionX, positionY, 30, 30);
+    	Sandbox.getGraphicsContext().drawImage(sprite, positionX, positionY, 40, 40);
     }
 
     @Override

@@ -51,13 +51,12 @@ public class Player implements MovingEntity, KillableEntity {
         positionY = y;
         this.health = 100;
 
-        playerBoundary = new RectBoundedBox(positionX-5, positionY-5, GlobalConstants.PLAYER_WIDTH+5, GlobalConstants.PLAYER_HEIGHT+5);
+        playerBoundary = new RectBoundedBox(positionX-5, positionY-5, GlobalConstants.PLAYER_WIDTH+5, GlobalConstants.PLAYER_HEIGHT+23);
         
-        Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-        down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        right  = ImageUtils.crop(img, 271, 123, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        up = ImageUtils.crop(img, 331, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        left = ImageUtils.crop(img, 301, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        down  = ImageUtils.loadImage("Resources/img/sprites/chungus.png");
+        right  = ImageUtils.loadImage("Resources/img/sprites/blobMain.png");
+        up = ImageUtils.loadImage("Resources/img/sprites/blobMainBack.png");
+        left = ImageUtils.loadImage("Resources/img/sprites/blobLeft.png");
     }
 
     public void move(Direction direction) {
@@ -88,7 +87,7 @@ public class Player implements MovingEntity, KillableEntity {
     		this.currentDirection = Direction.UP;
     	switch (this.currentDirection) {
 		case DOWN:
-			Sandbox.getGraphicsContext().drawImage(this.down, positionX, positionY, GlobalConstants.PLAYER_WIDTH * GlobalConstants.PLAYER_SCALE, GlobalConstants.PLAYER_HEIGHT * GlobalConstants.PLAYER_SCALE);
+			Sandbox.getGraphicsContext().drawImage(this.down, positionX, positionY, GlobalConstants.PLAYER_WIDTH * GlobalConstants.PLAYER_SCALE+15, GlobalConstants.PLAYER_HEIGHT * GlobalConstants.PLAYER_SCALE+35);
 			break;
 		case LEFT:
 			Sandbox.getGraphicsContext().drawImage(this.left, positionX, positionY, GlobalConstants.PLAYER_WIDTH * GlobalConstants.PLAYER_SCALE, GlobalConstants.PLAYER_HEIGHT * GlobalConstants.PLAYER_SCALE);

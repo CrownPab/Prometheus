@@ -46,11 +46,10 @@ public class Runner implements KillableEntity {
 
         boundry = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
         
-        Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-        down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        right  = ImageUtils.crop(img, 271, 123, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        up = ImageUtils.crop(img, 331, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        left = ImageUtils.crop(img, 301, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        down  = ImageUtils.loadImage("Resources/img/sprites/runner.png");
+        right  = ImageUtils.loadImage("Resources/img/sprites/runnerRight.png");
+        up = ImageUtils.loadImage("Resources/img/sprites/runnerBack.png");
+        left = ImageUtils.loadImage("Resources/img/sprites/runnerLeft.png");
     }
 
     public int getHealth() {

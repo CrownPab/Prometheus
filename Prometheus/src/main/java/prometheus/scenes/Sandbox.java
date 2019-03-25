@@ -41,6 +41,7 @@ public class Sandbox {
     static Scene s;
     static Group root;
     public static Image health;
+    public static Image floor;
     static Canvas c;
     static GraphicsContext gc;
     private static boolean sceneStarted;

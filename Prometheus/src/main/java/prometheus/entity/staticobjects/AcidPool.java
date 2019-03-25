@@ -25,8 +25,8 @@ public class AcidPool implements StaticEntity {
     	width = 16;
     	height = 16;
     	
-        Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-        sprite  = ImageUtils.crop(img, 211, 123, 16, 16);
+        sprite = ImageUtils.loadImage("Resources/img/sprites/acid.png");
+        //sprite  = ImageUtils.crop(img, 211, 123, 16, 16);
     	entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
     }
     
@@ -37,7 +37,7 @@ public class AcidPool implements StaticEntity {
 
     @Override
     public void draw() {
-    	Sandbox.getGraphicsContext().drawImage(sprite, positionX, positionY,31,31);
+    	Sandbox.getGraphicsContext().drawImage(sprite, positionX, positionY,32,32);
     }
 
     @Override

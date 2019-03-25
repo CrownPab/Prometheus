@@ -50,15 +50,10 @@ public class Wizard implements KillableEntity {
 
         boundry = new RectBoundedBox(positionX-5, positionY-5, GlobalConstants.PLAYER_WIDTH+5, GlobalConstants.PLAYER_HEIGHT+5);
         
-        Image img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
-//        down  = ImageUtils.crop(img, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        left  = ImageUtils.crop(img, 30, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        up = ImageUtils.crop(img, 60, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-//        right = ImageUtils.crop(img, 90, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        down  = ImageUtils.crop(img, 271, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        right  = ImageUtils.crop(img, 271, 123, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        up = ImageUtils.crop(img, 331, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
-        left = ImageUtils.crop(img, 301, 93, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        down  = ImageUtils.loadImage("Resources/img/sprites/wizard.png");
+        right  = ImageUtils.loadImage("Resources/img/sprites/wizard.png");
+        up = ImageUtils.loadImage("Resources/img/sprites/wizard.png");
+        left = ImageUtils.loadImage("Resources/img/sprites/wizard.png");
         this.lastShot = System.currentTimeMillis();
     }
 

@@ -11,6 +11,7 @@ import prometheus.enemies.Wizard;
 import prometheus.entity.staticobjects.AcidPool;
 import prometheus.entity.staticobjects.Wall;
 import prometheus.scenes.Sandbox;
+import prometheus.utils.ImageUtils;
 
 public class Map
 {
@@ -28,6 +29,9 @@ public class Map
 		
 		//Make new player in safe location
 		Sandbox.sandboxPlayer.init(340,340);
+		
+		//Initialize the floor for this map
+		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor1.png");
 		
     	//Border
 		for(int i = 0; i < SCENE_WIDTH; i += 32){
@@ -72,6 +76,9 @@ public class Map
 		{
 			Sandbox.getEntities().remove(i);
 		}
+		
+		//Initialize the floor for this map
+		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor2.png");
 		
 		//Make player in safe location
 		Sandbox.sandboxPlayer.init(320,320);
@@ -149,6 +156,8 @@ public class Map
 		//Make player in safe location
 		Sandbox.sandboxPlayer.init(320,200);
 				
+		//Initialize the floor for this map
+		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor2.png");
 		
     	//Clear Map
     	System.out.println(Sandbox.getEntities().size());
@@ -237,6 +246,9 @@ public class Map
 		//Make player in safe location
 		Sandbox.sandboxPlayer.init(320,320);
 		
+		//Initialize the floor for this map
+		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor4.png");
+		
     	//Clear Map
     	System.out.println(Sandbox.getEntities().size());
     	for(int i = Sandbox.getEntities().size()-1;i>=1;i--)
@@ -292,6 +304,9 @@ public class Map
     	
 		//Make player in safe location
 		Sandbox.sandboxPlayer.init(320,320);
+		
+		//Initialize the floor for this map
+		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor5.png");
 		
     	//Clear Map
     	System.out.println(Sandbox.getEntities().size());
@@ -452,6 +467,7 @@ public class Map
 	
 	public static void lvl1Progress()
 	{
+		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
 		if(lvl == 1 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
@@ -467,6 +483,9 @@ public class Map
         	for(int i = 0;i<1;i++)
         	{
         		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
         	}
         	wave++;
         }
@@ -474,7 +493,12 @@ public class Map
         {
         	for(int i = 0;i<1;i++)
         	{
-        	 spawnWizard();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
         	}
         	wave++;
         }	
@@ -485,10 +509,13 @@ public class Map
 	}
 	public static void lvl2Progress()
 	{
+		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
 		if(lvl == 2 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
         	{
+        		spawnWizard();
+        		spawnRunner();
         		spawnWizard();
         		spawnRunner();
         	}
@@ -500,7 +527,12 @@ public class Map
         	for(int i = 0;i<1;i++)
         	{
         		spawnWizard();
-        		spawnRunner();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
         	}
         	wave++;
         }
@@ -509,6 +541,14 @@ public class Map
         	for(int i = 0;i<1;i++)
         	{
         		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnRunner();
         		spawnRunner();
         	}
         	wave++;
@@ -520,12 +560,17 @@ public class Map
 	}
 	public static void lvl3Progress()
 	{
+		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
 		if(lvl == 3 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
         	{
         		spawnWizard();
-        		spawnRunner();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
         	}
         	wave++;
         }
@@ -535,7 +580,16 @@ public class Map
         	for(int i = 0;i<1;i++)
         	{
         		spawnWizard();
-        		spawnRunner();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
         	}
         	wave++;
         }
@@ -544,7 +598,16 @@ public class Map
         	for(int i = 0;i<1;i++)
         	{
         		spawnWizard();
-        		spawnRunner();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
+        		spawnWizard();
         	}
         	wave++;
         }	
@@ -555,11 +618,15 @@ public class Map
 	}
 	public static void lvl4Progress()
 	{
+		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
 		if(lvl == 4 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
         	{
-        		spawnWizard();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
         		spawnRunner();
         	}
         	wave++;
@@ -569,7 +636,14 @@ public class Map
         	//Spawn in mobs here
         	for(int i = 0;i<1;i++)
         	{
-        		spawnWizard();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
         		spawnRunner();
         	}
         	wave++;
@@ -578,7 +652,15 @@ public class Map
         {
         	for(int i = 0;i<1;i++)
         	{
-        		spawnWizard();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
+        		spawnRunner();
         		spawnRunner();
         	}
         	wave++;
@@ -590,10 +672,17 @@ public class Map
 	}
 	public static void lvl5Progress()
 	{
+		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
 		if(lvl == 5 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
         	{
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
         		spawnWizard();
         		spawnRunner();
         	}
@@ -606,6 +695,16 @@ public class Map
         	{
         		spawnWizard();
         		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
         	}
         	wave++;
         }
@@ -613,6 +712,16 @@ public class Map
         {
         	for(int i = 0;i<1;i++)
         	{
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
+        		spawnWizard();
+        		spawnRunner();
         		spawnWizard();
         		spawnRunner();
         	}
