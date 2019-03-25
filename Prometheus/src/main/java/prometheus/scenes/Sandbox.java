@@ -29,11 +29,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import prometheus.GameLoop;
+import prometheus.Prometheus;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
 import prometheus.gamecontroller.EventHandler;
 import prometheus.maps.Map;
 import prometheus.utils.FileUtils;
+import prometheus.utils.ImageUtils;
 
 
 public class Sandbox {
@@ -149,22 +151,28 @@ public class Sandbox {
 		Text credit2 = new Text("Gagandeep Pabla");
 		Text credit3 = new Text("Lucas Simone");
 		Text credit4 = new Text("Vital Golub");
-
-		credit1.setX(50);
+		
+		credit1.getStyleClass().add("text2");
+		credit1.setX(40);
 		credit1.setY(220);
-
-		credit2.setX(50);
+		
+		credit2.getStyleClass().add("text2");
+		credit2.setX(40);
 		credit2.setY(240);
 
-		credit3.setX(50);
+		credit3.getStyleClass().add("text2");
+		credit3.setX(40);
 		credit3.setY(260);
 
-		credit4.setX(50);
+		credit4.getStyleClass().add("text2");
+		credit4.setX(40);
 		credit4.setY(280);
 
 		pane.getChildren().addAll(credit1, credit2, credit3, credit4);
 
 		Scene outScene = new Scene(pane, 200, 200);
+		String css = Prometheus.class.getResource("style.css").toExternalForm(); 
+	    outScene.getStylesheets().add(css);
 		outStage.setTitle("Credits");
 		outStage.setResizable(false);
 		outStage.setScene(outScene);
@@ -208,23 +216,25 @@ public class Sandbox {
 		Text stat2 = new Text("Deaths: " + FileUtils.getPlayerDeaths(username));
 		// THis is a placeholder image
 		// We are going to put the sprite of the character here
-		ImageView imageView = new ImageView("file:///C:\\Users\\G\\git\\Prometheus\\Prometheus\\Prometheus\\Resources\\img\\sprites\\blobMain.png");
+		ImageView imageView = new ImageView(ImageUtils.loadImage("Resources/img/sprites/blobMain.png"));
 		pane.getStyleClass().add("root");
-		imageView.setX(35);
+		imageView.setX(0);
 		imageView.setY(1);
 
 		pane.getChildren().add(imageView);
 
-		stat1.setX(35);
-		stat1.setY(100);
+		stat1.setX(100);
+		stat1.setY(15);
 
-		stat2.setX(35);
-		stat2.setY(120);
+		stat2.setX(100);
+		stat2.setY(35);
 
 		pane.getChildren().addAll(stat1, stat2);
 
-		Scene outScene = new Scene(pane, 200, 200);
-		outStage.setTitle("Credits");
+		Scene outScene = new Scene(pane, 200, 50);
+		String css = Prometheus.class.getResource("style.css").toExternalForm(); 
+	    outScene.getStylesheets().add(css);
+		outStage.setTitle("Stats");
 		outStage.setResizable(false);
 		outStage.setScene(outScene);
 		outStage.show();
