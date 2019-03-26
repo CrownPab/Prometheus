@@ -23,7 +23,6 @@ configure(getDeps) {
     description = 'Download all dependencies'
 }
 
-
 dependencies {
 
 }

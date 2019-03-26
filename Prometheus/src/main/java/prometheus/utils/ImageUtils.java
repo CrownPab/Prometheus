@@ -7,9 +7,15 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 
 public class ImageUtils {
+	/**
+	 * Function to convert a path to a JavaFX Image object
+	 * @param path Path of the image
+	 * @return Image object at given path
+	 */
     public static Image loadImage(String path) {
         File file = new File(path);
         String imagePath = file.getAbsolutePath();
+        //Modify based on OS
         if (File.separatorChar == '\\') {
             // From Windows to Linux/Mac
             imagePath=imagePath.replace('/', File.separatorChar);
@@ -19,13 +25,10 @@ public class ImageUtils {
             imagePath=imagePath.replace('\\', File.separatorChar);
 
         }
+        
+        //Add file: to work with JavaFX
         imagePath="file:"+imagePath;
 
         return new Image(imagePath);
-    }
-    public static Image crop(Image img,int x,int y,int w,int h){
-        PixelReader reader = img.getPixelReader();
-        WritableImage newImage = new WritableImage(reader, x, y, w, h);
-        return newImage;
     }
 }

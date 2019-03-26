@@ -50,7 +50,7 @@ public class Bubble implements MovingEntity{
     @Override
     public void draw() {
     	Sandbox.getGraphicsContext().setStroke(Color.CORNFLOWERBLUE);
-    	Sandbox.getGraphicsContext().strokeOval(positionX+5, positionY+5, 20, 20);
+    	Sandbox.getGraphicsContext().strokeOval(positionX+10, positionY+10, 20, 20);
     }
 
     @Override

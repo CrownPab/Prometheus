@@ -1,5 +1,7 @@
 package prometheus;
 
+import java.io.IOException;
+
 import prometheus.utils.FileUtils;
 
 public class PlayerStats {
@@ -16,11 +18,27 @@ public class PlayerStats {
 	
 	public void addKills(int amount) {
 		this.kills += amount;
-		FileUtils.setPlayerStats(name, this.kills, this.deaths);
+//		FileUtils.setPlayerStats(name, this.kills, this.deaths);
+		try {
+			Prometheus.toServer.writeUTF(name);
+			Prometheus.toServer.writeInt(kills);
+			Prometheus.toServer.writeInt(deaths);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void addDeaths(int amount) {
 		this.deaths += amount;
-		FileUtils.setPlayerStats(name, this.kills, this.deaths);
-	}
+//		FileUtils.setPlayerStats(name, this.kills, this.deaths);
+		try {
+			Prometheus.toServer.writeUTF(name);
+			Prometheus.toServer.writeInt(kills);
+			Prometheus.toServer.writeInt(deaths);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+}
 }
