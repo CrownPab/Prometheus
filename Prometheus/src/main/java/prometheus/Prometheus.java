@@ -22,6 +22,8 @@ public class Prometheus extends Application {
 	static DataInputStream inputFromClient = null;
 	static DataOutputStream outputToClient = null;
 	
+	static boolean serverActive = true;
+	
     @Override
     public void start(Stage primaryStage) {
     	try {
@@ -40,6 +42,10 @@ public class Prometheus extends Application {
         s.getStylesheets().add(css);
         primaryStage.setScene(s);
         primaryStage.setResizable(false);
+        primaryStage.setOnCloseRequest(e -> {
+        	serverActive = false;
+        	System.exit(0);
+        });
         primaryStage.show();
     }
 
@@ -57,7 +63,7 @@ public class Prometheus extends Application {
     			inputFromClient = new DataInputStream(socket.getInputStream());
     			outputToClient = new DataOutputStream(socket.getOutputStream());
 
-    			while (true) {
+    			while (serverActive) {
     				if(inputFromClient != null && outputToClient != null) {
     					String name = inputFromClient.readUTF();
     					int kills = inputFromClient.readInt();
@@ -68,6 +74,9 @@ public class Prometheus extends Application {
     					FileUtils.setPlayerStats(name, kills, deaths);
     				}
     			}
+    			
+    			socket.close();
+    			serverSocket.close();
     		} catch (IOException ex) {
     			ex.printStackTrace();
     		}
