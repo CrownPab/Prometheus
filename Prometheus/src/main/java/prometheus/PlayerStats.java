@@ -23,6 +23,7 @@ public class PlayerStats {
 			Prometheus.toServer.writeUTF(name);
 			Prometheus.toServer.writeInt(kills);
 			Prometheus.toServer.writeInt(deaths);
+			Prometheus.toServer.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,6 +37,7 @@ public class PlayerStats {
 			Prometheus.toServer.writeUTF(name);
 			Prometheus.toServer.writeInt(kills);
 			Prometheus.toServer.writeInt(deaths);
+			Prometheus.toServer.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
