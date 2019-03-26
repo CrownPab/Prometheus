@@ -299,18 +299,21 @@ public class Sandbox {
     	
     	Button button = new Button();
     	button.setText("Play Again");
+		button.getStyleClass().add("green");
     	button.setOnAction(e -> init());
     	button.setLayoutX(280);
     	button.setLayoutY(300);
     	
     	Button button2 = new Button();
     	button2.setText("Main menu");
+		button2.getStyleClass().add("green");
     	button2.setOnAction(e -> mainMenu());
     	button2.setLayoutX(280);
     	button2.setLayoutY(340);
     	
     	Button button3 = new Button();
     	button3.setText("New User");
+		button3.getStyleClass().add("green");
     	button3.setOnAction(e -> introScreen());
     	button3.setLayoutX(280);
     	button3.setLayoutY(380);
