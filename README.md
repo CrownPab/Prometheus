@@ -9,7 +9,7 @@ Lucas Simone
 Vital Golub  
   
 Contributions:  
-Vital Golub: Everything  
-Lucas Simone: Some stuff  
-Atharva Shinde: Some stuff  
-Gagan Pabla: Some stuff  
+Vital Golub - Movement, Projectiles, collision, FileIO(PlayerStats, and leaderboards), SocketIO(Stat saving by server), interfaces  
+Lucas Simone - Mob design(Wizard, Runner), Level/Map design(Walls, wave system, map progress), image work, balancing and bounding box work  
+Gagan Pabla - Main menu, credits screen, leaderboard screen, end title screen, stats screen, created and worked with css style sheet  
+Atharva Shinde - Sprites creation and implementation (Mob sprites, level sprites, static entity sprites, main player sprites), animations  
