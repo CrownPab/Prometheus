@@ -3,23 +3,12 @@ plugins {
     id 'java-library'
 }
 
-task runClient(type:JavaExec) {
-//	dependsOn 'runServer'
+task runApp(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "prometheus.Prometheus"
 }
 
-task runServer(type:JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "prometheus.Server"
-} 
-
-configure(runServer) {   
-    group = BasePlugin.BUILD_GROUP
-    description = 'Run server file'
-}
-
-configure(runClient) {   
+configure(runApp) {   
     group = BasePlugin.BUILD_GROUP
     description = 'Run file through main class'
 }
