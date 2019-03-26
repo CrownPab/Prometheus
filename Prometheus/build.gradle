@@ -9,7 +9,6 @@ task runClient(type:JavaExec) {
     main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "prometheus.Prometheus"
 }
 
-@ParallelizableTask
 task runServer(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "prometheus.Server"
