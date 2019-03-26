@@ -1,9 +1,22 @@
 package prometheus.entity;
 
 public interface KillableEntity extends Entity {
-
-    public void die();
-    public void reduceHealth(int damage);
-    public int getHealth();
-
+	
+	
+	/**
+	 * set entity death status aand removes from board
+	 */
+    public void die(); 	
+    
+    /**
+	 * removes health from entity when attacked
+	 */
+    
+    public void reduceHealth(int damage);	
+    
+    /**
+	 * returns health
+	 */
+    
+    public int getHealth();					
 }

@@ -27,7 +27,8 @@ public class GameLoop {
     public static double getCurrentGameTime() {
         return currentGameTime;
     }
-
+    
+    
     public static void start(GraphicsContext gc) {
         animTimer = new AnimationTimer() {
             public void handle(long currentNanoTime) {
@@ -124,9 +125,10 @@ public class GameLoop {
         
         Map.waveProgress();
     }
-
-    public static void renderGame() {
-        for (Entity e : Sandbox.getEntities()) {
+    
+    // changes health bar as health decreases
+    public static void renderGame() { 
+        for (Entity e : Sandbox.getEntities()) { // draw every entities onto screen
             e.draw();
         }
         if((Sandbox.getPlayer().getHealth()>=90) && (Sandbox.getPlayer().getHealth()<=100))

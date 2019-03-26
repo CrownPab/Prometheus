@@ -20,9 +20,9 @@ public class Prometheus extends Application {
     @Override
     public void start(Stage primaryStage) {
     	try {
-			socket = new Socket("localhost", 2500);
-			fromServer = new DataInputStream(socket.getInputStream());
-			toServer = new DataOutputStream(socket.getOutputStream());
+			socket = new Socket("localhost", 2500); // set Socket 
+			fromServer = new DataInputStream(socket.getInputStream()); // set input stream
+			toServer = new DataOutputStream(socket.getOutputStream()); // set output stream
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -13,10 +13,12 @@ import prometheus.utils.ImageUtils;
 
 public class Runner implements KillableEntity {
 
+	//initalize stats
     private int health;
     private boolean isAlive;
     RectBoundedBox boundry;
 
+    //declare images
     Image up;
     Image down;
     Image left;
@@ -29,17 +31,17 @@ public class Runner implements KillableEntity {
 
     String name;
 
-    public Runner() {
+    public Runner() {// default spawn 
         init(64,64);
     }
 
-    public Runner(int posX, int posY) {
+    public Runner(int posX, int posY) {// spawn given x,y spawn location
         init(posX, posY);
         health = 10;
         isAlive = true;
     }
     
-    private void init(int x, int y) {
+    private void init(int x, int y) {// set runner with appropriate location, images, and hitbox
         name = "Runner";
         positionX = x;
         positionY = y;
@@ -65,7 +67,7 @@ public class Runner implements KillableEntity {
     }
 
     @Override
-    public boolean isColliding(Entity b) {
+    public boolean isColliding(Entity b) { //boolean for if hitboxes of two entities are in contact
         RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
         return boundry.checkCollision(otherEntityBoundary);
     }
@@ -76,7 +78,7 @@ public class Runner implements KillableEntity {
     		this.currentDirection = Direction.UP;
     	this.currentDirection = getDirectionTo(Sandbox.getPlayer());
     	
-    	switch (this.currentDirection) {
+    	switch (this.currentDirection) { // sets image depending on which way the player is looking
 		case DOWN:
 			Sandbox.getGraphicsContext().drawImage(this.down, positionX, positionY, GlobalConstants.PLAYER_WIDTH * GlobalConstants.PLAYER_SCALE, GlobalConstants.PLAYER_HEIGHT * GlobalConstants.PLAYER_SCALE);
 			break;
@@ -105,7 +107,7 @@ public class Runner implements KillableEntity {
     @Override
     public void die() {
     	this.isAlive = false;
-    	Sandbox.getPlayer().getStats().addKills(1);
+    	Sandbox.getPlayer().getStats().addKills(1); // increment player's kill count when they kill a runner
     }
 
     @Override
@@ -128,7 +130,7 @@ public class Runner implements KillableEntity {
     }
 
     @Override
-    public RectBoundedBox getBoundingBox() {
+    public RectBoundedBox getBoundingBox() { // set hit boxes
         boundry.setPosition(positionX, positionY);
         return boundry;
     }
@@ -138,7 +140,7 @@ public class Runner implements KillableEntity {
         return true;
     }
     
-    public Direction getDirectionTo(Entity e) {
+    public Direction getDirectionTo(Entity e) {// directions to get to set entity
 
 		int deltaX = e.getPositionX() - this.positionX;
 		int deltaY = e.getPositionY() - this.positionY;
@@ -183,13 +185,13 @@ public class Runner implements KillableEntity {
 	}
    
     @Override
-	public void onCollision(Entity e) {
+	public void onCollision(Entity e) { // if colliding with player then decrease player health
 		if(e instanceof Player) {
 			((Player) e).reduceHealth(1);
 		}
 	}
     
-	public void move(int steps, Direction direction) {
+	public void move(int steps, Direction direction) { // moves runner
 		steps *= GameLoop.getDeltaTime();
 
 		if (steps == 0) {
