@@ -3,12 +3,24 @@ plugins {
     id 'java-library'
 }
 
-task runApp(type:JavaExec) {
+task runClient(type:JavaExec) {
+//	dependsOn 'runServer'
     classpath = sourceSets.main.runtimeClasspath
     main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "prometheus.Prometheus"
 }
 
-configure(runApp) {   
+@ParallelizableTask
+task runServer(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "prometheus.Server"
+} 
+
+configure(runServer) {   
+    group = BasePlugin.BUILD_GROUP
+    description = 'Run server file'
+}
+
+configure(runClient) {   
     group = BasePlugin.BUILD_GROUP
     description = 'Run file through main class'
 }
@@ -21,6 +33,15 @@ task getDeps(type: Copy) {
 configure(getDeps) {   
     group = BasePlugin.BUILD_GROUP
     description = 'Download all dependencies'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/java"]
+            includes = ["**/*.css"]
+        }
+    }
 }
 
 dependencies {

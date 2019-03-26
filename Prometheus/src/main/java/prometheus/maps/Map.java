@@ -28,10 +28,10 @@ public class Map
 		mapLayout = new int[20][20];
 		
 		//Make new player in safe location
-		Sandbox.sandboxPlayer.init(360,360);
+		Sandbox.getPlayer().init(360,360);
 		
 		//Initialize the floor for this map
-		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor1.png");
+		Sandbox.setFloor(ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor1.png"));
 		
     	//Border
 		for(int i = 0; i < SCENE_WIDTH; i += 32){
@@ -78,10 +78,10 @@ public class Map
 		}
 		
 		//Initialize the floor for this map
-		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor2.png");
+		Sandbox.setFloor(ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor2.png"));
 		
 		//Make player in safe location
-		Sandbox.sandboxPlayer.init(320,320);
+		Sandbox.getPlayer().init(320,320);
 		
     	//Border
     	for(int i = 0; i < SCENE_WIDTH; i += 32){
@@ -154,10 +154,10 @@ public class Map
 		lvl = 3;
     	
 		//Make player in safe location
-		Sandbox.sandboxPlayer.init(320,200);
+		Sandbox.getPlayer().init(320,200);
 				
 		//Initialize the floor for this map
-		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor2.png");
+		Sandbox.setFloor(ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor2.png"));
 		
     	//Clear Map
     	System.out.println(Sandbox.getEntities().size());
@@ -244,10 +244,10 @@ public class Map
 		lvl = 4;
     	
 		//Make player in safe location
-		Sandbox.sandboxPlayer.init(320,320);
+		Sandbox.getPlayer().init(320,320);
 		
 		//Initialize the floor for this map
-		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor4.png");
+		Sandbox.setFloor(ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor4.png"));
 		
     	//Clear Map
     	System.out.println(Sandbox.getEntities().size());
@@ -303,10 +303,10 @@ public class Map
 		lvl = 5;
     	
 		//Make player in safe location
-		Sandbox.sandboxPlayer.init(320,320);
+		Sandbox.getPlayer().init(320,320);
 		
 		//Initialize the floor for this map
-		Sandbox.floor  = ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor5.png");
+		Sandbox.setFloor(ImageUtils.loadImage("Resources/img/sprites/floor/DungeonFloor5.png"));
 		
     	//Clear Map
     	System.out.println(Sandbox.getEntities().size());
@@ -467,7 +467,7 @@ public class Map
 	
 	public static void lvl1Progress()
 	{
-		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
+		Sandbox.getGraphicsContext().drawImage(Sandbox.getFloor(), 0,0,640,640);
 		if(lvl == 1 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
@@ -509,7 +509,7 @@ public class Map
 	}
 	public static void lvl2Progress()
 	{
-		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
+		Sandbox.getGraphicsContext().drawImage(Sandbox.getFloor(), 0,0,640,640);
 		if(lvl == 2 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
@@ -560,7 +560,7 @@ public class Map
 	}
 	public static void lvl3Progress()
 	{
-		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
+		Sandbox.getGraphicsContext().drawImage(Sandbox.getFloor(), 0,0,640,640);
 		if(lvl == 3 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
@@ -618,7 +618,7 @@ public class Map
 	}
 	public static void lvl4Progress()
 	{
-		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
+		Sandbox.getGraphicsContext().drawImage(Sandbox.getFloor(), 0,0,640,640);
 		if(lvl == 4 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)
@@ -672,7 +672,7 @@ public class Map
 	}
 	public static void lvl5Progress()
 	{
-		Sandbox.getGraphicsContext().drawImage(Sandbox.floor, 0,0,640,640);
+		Sandbox.getGraphicsContext().drawImage(Sandbox.getFloor(), 0,0,640,640);
 		if(lvl == 5 && wave == 1 && mobCount == 0)
         {
         	for(int i = 0;i<1 ;i++)

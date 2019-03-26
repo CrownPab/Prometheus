@@ -40,7 +40,7 @@ public class Wizard implements KillableEntity {
     }
     
     public void shoot(int speed) {    
-    	Sandbox.addEntityToGame(new WizardProjectile(positionX, positionY, getDirectionTo(Sandbox.getPlayer()), speed));
+    	Sandbox.addEntityToGame(new WizardProjectile(positionX, positionY, speed));
     }
 
     private void init(int x, int y) {

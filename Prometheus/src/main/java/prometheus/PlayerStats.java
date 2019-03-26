@@ -18,7 +18,6 @@ public class PlayerStats {
 
 	public void addKills(int amount) {
 		this.kills += amount;
-//		FileUtils.setPlayerStats(name, this.kills, this.deaths);
 		try {
 			Prometheus.toServer.writeUTF(name);
 			Prometheus.toServer.writeInt(kills);
@@ -31,7 +30,6 @@ public class PlayerStats {
 
 	public void addDeaths(int amount) {
 		this.deaths += amount;
-//		FileUtils.setPlayerStats(name, this.kills, this.deaths);
 		try {
 			Prometheus.toServer.writeUTF(name);
 			Prometheus.toServer.writeInt(kills);

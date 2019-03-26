@@ -5,13 +5,11 @@ import static prometheus.constants.GlobalConstants.CANVAS_WIDTH;
 import static prometheus.constants.GlobalConstants.SCENE_HEIGHT;
 import static prometheus.constants.GlobalConstants.SCENE_WIDTH;
 
-import javafx.geometry.Insets;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
-import javafx.scene.image.Image;
-
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -20,8 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -32,7 +35,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import prometheus.GameLoop;
 import prometheus.Prometheus;
-import prometheus.constants.GlobalConstants;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
 import prometheus.gamecontroller.EventHandler;
@@ -45,23 +47,32 @@ public class Sandbox {
 
     static Scene s;
     static Group root;
-    public static Image health;
-    public static Image floor;
+    static Image health;
+    static Image floor;
     static Canvas c;
     static GraphicsContext gc;
-    private static boolean sceneStarted;
-    public static Player sandboxPlayer;
+    static boolean sceneStarted;
+    private static Player sandboxPlayer;
     static String username;
     static{
         sceneStarted=false;
     }
-
+    
 	private static ArrayList<Entity> entities = new ArrayList<Entity>();
-
+	
+	/**
+	 * Get list of active entities
+	 * @return ArrayList of entities
+	 */
 	public static ArrayList<Entity> getEntities(){
 		return entities;
 	}
-
+	
+	/**
+	 * Function to add an entity to the game
+	 * @param e	Entity being added
+	 * @return boolean to see if the addition was successful
+	 */
 	public static boolean addEntityToGame(Entity e){
 		if(!entities.contains(e)){
 			entities.add(e);
@@ -71,12 +82,18 @@ public class Sandbox {
 		}
 	}
 	
+	/**
+	 * Initialize the scene and root values for the other screens
+	 */
 	private static void initValues() {
         root = new Group();
         s = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
     	
 	}
 	
+	/**
+	 * Creates the intro screen for the program, this is where the player enters a username
+	 */
     private static void introScreen() {
         root.getChildren().clear();
         GridPane pane = new GridPane();
@@ -101,49 +118,48 @@ public class Sandbox {
         hb.getChildren().addAll(label1,tf);
         ImageView imageView = new ImageView(ImageUtils.loadImage("Resources\\img\\Blob\\Blob\\PrometheusBackground.png"));
         vb.getChildren().addAll(hb,imageView);
-       
-        
+
         pane.add(tex, 100, 100);
         pane.add(vb,0,0);
-        
-       
-        
+
         root.getChildren().add(pane);
     }
     
+    /**
+     * Creates the main menu screen with credits, leaderboard, play game and stats for the player
+     */
     public static void mainMenu() {
     	root.getChildren().clear();
     	
 		Stage outStage = new Stage();
 		outStage.setX(1920 / 2 - 350);
 		outStage.setY(1080 / 2 - 155);
+
+		VBox pane = new VBox();
+		TextArea leaderBoard = new TextArea();
 		
-//		String uriString = new File("C:\\coding\\csci2020u\\InterfaceV2\\src\\application\\MoBamba.mp3").toURI()
-//		.toString();
-//		MediaPlayer player = new MediaPlayer(new Media(uriString));
-//		player.play();
-		
-		VBox pane = new VBox(); // borderpane is being used for the main menu screen
-		TextArea leaderBoard = new TextArea(); // this text area will be used for the leaderboard
-		
-		HBox vbox = new HBox(225); // creates vbox with spacing 20
+		HBox vbox = new HBox(220);
 		
 		Pane pane2 = new Pane();
 		
-		leaderBoard.setFont(new Font(15));
-		for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
+		for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet()) {
 			leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
-		leaderBoard.setStyle("-fx-background-color:orangered;");
+		}
+
+		leaderBoard.setStyle("-fx-control-inner-background:orangered; -fx-font-family: Consolas; -fx-font-size: 16px;" + 
+				" -fx-font-family: \"Arial Black\";" + 
+				" -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, white 0%, red 50%);" + 
+				" -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
 		Text leadBoard = new Text("Leaderboard");
 		leadBoard.getStyleClass().add("text1");
 		leadBoard.setX(210);
-		leadBoard.setY(375);
+		leadBoard.setY(400);
 		pane2.getChildren().add(leadBoard);
-		Button playGame = new Button("Play Game"); // users will click this button to enter the game
+		Button playGame = new Button("Play Game");
 		playGame.getStyleClass().add("green");
-		Button stats = new Button("Stats"); // users will click this button to view their stats
+		Button stats = new Button("Stats");
 		stats.getStyleClass().add("green");
-		Button credits = new Button("Credits"); // will display all personal that worked on the game for user to see
+		Button credits = new Button("Credits");
 		credits.getStyleClass().add("green");
 		playGame.setOnAction(a -> init());
 		
@@ -160,6 +176,10 @@ public class Sandbox {
 		pane.getStyleClass().add("root2");
     }
     
+    /**
+     * Creates a credit stage, separate from the main stage and scene
+     * @param outStage Stage that will be popped out
+     */
 	public static void credits(Stage outStage) {
 		Pane pane = new Pane();
 		pane.getStyleClass().add("root");
@@ -224,6 +244,10 @@ public class Sandbox {
 		}).start();
 	}
 	
+	/**
+     * Creates a stats stage, separate from the main stage and scene
+     * @param outStage Stage that will be popped out
+	 */
 	public static void stats(Stage outStage) {
 		Pane pane = new Pane();
 
@@ -257,6 +281,9 @@ public class Sandbox {
 
 	}
     
+	/**
+	 * Game init function, creates the first map and sets the canvas
+	 */
     private static void init() {
     	System.out.println("New Scene");
     	root.getChildren().clear();
@@ -276,12 +303,15 @@ public class Sandbox {
         //load map
         Map.Map1();
         
-
         //should be called at last it based on player
         EventHandler.attachEventHandlers(s);
 
     }
     
+    /**
+     * End game screen for the game, win or lose
+     * @param victory boolean to check if player won or lost
+     */
     public static void stopGame(boolean victory) {
     	GameLoop.animTimer.stop();
     	root.getChildren().clear();
@@ -328,7 +358,10 @@ public class Sandbox {
     	pane.getChildren().addAll(tf, button, button2, button3);
     	root.getChildren().addAll(pane);
     }
-
+    
+    /**
+     * Set up the scene for the first time
+     */
     public static void setupScene(){
         if(!sceneStarted){
         	initValues();
@@ -336,27 +369,85 @@ public class Sandbox {
             sceneStarted=true;
         }
     }
+    
+    /**
+     * 
+     * @return main scene object
+     */
     public static Scene getScene() {
         return s;
     }
-
+    
+    /**
+     * 
+     * @return returns main graphics context
+     */
     public static GraphicsContext getGraphicsContext() {
         return gc;
     }
-
+    
+    /**
+     * 
+     * @return main canvas from gram screen
+     */
     public static Canvas getCanvas() {
         return c;
     }
-
+    
+    /**
+     * Set played object and add them to the game
+     * @param p player object that should be added
+     */
     public static void setPlayer(Player p){
-        sandboxPlayer = p;
+    	sandboxPlayer = p;
         addEntityToGame(p);
     }
+    
+    /**
+     * 
+     * @return Player object stored in sandbox
+     */
     public static Player getPlayer(){
         return sandboxPlayer;
     }
-
+    
+    /**
+     * 
+     * @return username of current player
+     */
 	public static String getUsername() {
 		return username;
+	}
+	
+	/**
+	 * 
+	 * @return current floor image
+	 */
+	public static Image getFloor() {
+		return floor;
+	}
+	
+	/**
+	 * 
+	 * @param floor floor image
+	 */
+	public static void setFloor(Image floor) {
+		Sandbox.floor = floor;
+	}
+	
+	/**
+	 * 
+	 * @return health of sandbox player as image
+	 */
+	public static Image getHealth() {
+		return health;
+	}
+	
+	/**
+	 * 
+	 * @param health image to store current health image
+	 */
+	public static void setHealth(Image health) {
+		Sandbox.health = health;
 	}
 }
