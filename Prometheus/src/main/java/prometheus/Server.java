@@ -22,13 +22,15 @@ public class Server {
 			outputToClient = new DataOutputStream(socket.getOutputStream());
 
 			while (true) {
-				String name = inputFromClient.readUTF();
-				int kills = inputFromClient.readInt();
-				int deaths = inputFromClient.readInt();
-				
-				System.out.println("Username: " + name + " Kills: " + kills + " Deaths: " + deaths);
-				
-				FileUtils.setPlayerStats(name, kills, deaths);
+				if(inputFromClient != null && outputToClient != null) {
+					String name = inputFromClient.readUTF();
+					int kills = inputFromClient.readInt();
+					int deaths = inputFromClient.readInt();
+					
+					System.out.println("Username: " + name + " Kills: " + kills + " Deaths: " + deaths);
+					
+					FileUtils.setPlayerStats(name, kills, deaths);
+				}
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();

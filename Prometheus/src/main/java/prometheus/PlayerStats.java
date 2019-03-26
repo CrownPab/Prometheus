@@ -5,17 +5,17 @@ import java.io.IOException;
 import prometheus.utils.FileUtils;
 
 public class PlayerStats {
-	
+
 	String name;
 	public int kills;
 	public int deaths;
-	
+
 	public PlayerStats(String username) {
 		name = username;
 		kills = FileUtils.getPlayerKills(username);
 		deaths = FileUtils.getPlayerDeaths(username);
 	}
-	
+
 	public void addKills(int amount) {
 		this.kills += amount;
 //		FileUtils.setPlayerStats(name, this.kills, this.deaths);
@@ -25,11 +25,10 @@ public class PlayerStats {
 			Prometheus.toServer.writeInt(deaths);
 			Prometheus.toServer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void addDeaths(int amount) {
 		this.deaths += amount;
 //		FileUtils.setPlayerStats(name, this.kills, this.deaths);
@@ -39,8 +38,7 @@ public class PlayerStats {
 			Prometheus.toServer.writeInt(deaths);
 			Prometheus.toServer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+	}
 }

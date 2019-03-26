@@ -32,6 +32,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import prometheus.GameLoop;
 import prometheus.Prometheus;
+import prometheus.constants.GlobalConstants;
 import prometheus.entity.Entity;
 import prometheus.entity.player.Player;
 import prometheus.gamecontroller.EventHandler;
@@ -125,13 +126,13 @@ public class Sandbox {
 		VBox pane = new VBox(); // borderpane is being used for the main menu screen
 		TextArea leaderBoard = new TextArea(); // this text area will be used for the leaderboard
 		
-		HBox vbox = new HBox(235); // creates vbox with spacing 20
+		HBox vbox = new HBox(225); // creates vbox with spacing 20
 		
 		Pane pane2 = new Pane();
 		
 		leaderBoard.setFont(new Font(15));
 		for(Entry<String, Integer> entry: FileUtils.getHighscoresList().entrySet())
-		leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
+			leaderBoard.appendText(entry.getKey() + " - Kills: " + entry.getValue() + " Deaths: " + FileUtils.getPlayerDeaths(entry.getKey())+"\n");
 		leaderBoard.setStyle("-fx-background-color:orangered;");
 		Text leadBoard = new Text("Leaderboard");
 		leadBoard.getStyleClass().add("text1");
@@ -285,16 +286,23 @@ public class Sandbox {
     	GameLoop.animTimer.stop();
     	root.getChildren().clear();
     	
+    	Pane pane = new Pane();
+    	pane.setMinHeight(SCENE_HEIGHT+50);
+    	pane.setMinWidth(SCENE_WIDTH+50);
+        pane.getStyleClass().add("root2");
+        
    		Text tf = new Text();
    		
     	if(victory) {
     		tf.setText("You've won!");
+    		tf.setStroke(Color.GREEN);
     	}
     	else {
     		tf.setText("You have lost!");
+    		tf.setStroke(Color.RED);
     	}
     	tf.setFont(new Font(30));
-    	tf.setLayoutX(280);
+    	tf.setLayoutX(240);
     	tf.setLayoutY(200);
     	
     	Button button = new Button();
@@ -317,10 +325,9 @@ public class Sandbox {
     	button3.setOnAction(e -> introScreen());
     	button3.setLayoutX(280);
     	button3.setLayoutY(380);
-    	root.getChildren().addAll(tf, button, button2, button3);
+    	pane.getChildren().addAll(tf, button, button2, button3);
+    	root.getChildren().addAll(pane);
     }
-
-
 
     public static void setupScene(){
         if(!sceneStarted){
